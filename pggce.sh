@@ -43,6 +43,7 @@ case $typed in
         ### note --no-user-output-enabled
         gcestart ;;
     2 )
+        projectinterface
         gcestart ;;
     3 )
         processorcount

@@ -57,3 +57,56 @@ read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 if [[ "$typed" == "2" || "$typed" == "4" || "$typed" == "6" || "$typed" == "8" ]]; then
   echo "$typed" > /var/plexguide/project.processor; else processorcount; fi
 }
+
+projectinterface () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Project Interface                   ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Project ID: $projectid
+
+[1] Utilize/Change Existing Project
+[2] Set New Project
+[3] Destroy Existing Project
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+
+case $typed in
+    1 )
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Set Project Name                    ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
+and keep it all lower case! Failing to do so will result in naming
+issues.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+        read -p 'Type Project Name | Press [ENTER]: ' projectname < /dev/tty
+        rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
+        projectid="pg-$projectname-$rand"
+        gcloud projects create $projectid
+        projectinterface ;;
+    2 )
+        projectinterface
+        projectinterface ;;
+    3 )
+        processorcount
+        projectinterface ;;
+    z )
+        exit ;;
+    Z )
+        exit ;;
+    * )
+        processorcount ;;
+esac
+
+}
