@@ -76,7 +76,7 @@ EOF
 read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
-    1 )
+    2 )
 
 tee <<-EOF
 
@@ -92,6 +92,7 @@ Quitting? Type >>> exit (all lowercase)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
         read -p 'Type Project Name | Press [ENTER]: ' projectname < /dev/tty
+        echo ""
 
           # loops user back to exit if typed
           if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" ]]; then
@@ -103,7 +104,7 @@ EOF
         gcloud projects create $projectid2
         projectid=projectid2
         projectinterface ;;
-    2 )
+    1 )
         projectinterface
         projectinterface ;;
     3 )
