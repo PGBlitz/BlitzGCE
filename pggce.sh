@@ -5,10 +5,13 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/pggce.sh
+source /opt/pggce/functions/main.sh
 
-question1 () {
-gcestarter
+### the primary interface for GCE
+gcestart () {
+
+  ### call key variables ~ /functions/main.sh
+  variablepull
 
 tee <<-EOF
 
@@ -17,14 +20,15 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. Log Into the Account  : $account
-2. Build a New Project
-3. Set Project ID        : $projectid
-4. Set Processor Count   : $processor
+2. Project Interface     : $projectid
+3. Set Processor Count   : $processor
+4. NVME Drive Count      : $nvmecount
 5. Set IP Region / Server: $ipaddress - $ipregion
 6. Deploy GCE Server     : $serverstatus
-7. SSH into the GCE Box
-8. Destroy Server
-Z. EXIT
+7. SSH into the GCE Box  : $sshstatus
+
+a. Destroy Server
+z. EXIT
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -33,20 +37,23 @@ read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-        ansible-playbook /opt/plexguide/menu/processor/processor.yml  --tags performance
-        rebootpro ;;
+        gcestart ;;
     2 )
-        ansible-playbook /opt/plexguide/roles/menu/processor.yml  --tags ondemand
-        rebootpro ;;
+        gcestart ;;
     3 )
-        ansible-playbook /opt/plexguide/roles/menu/processor.yml  --tags conservative
-        rebootpro ;;
+        gcestart ;;
     4 )
-        echo ""
-        cpufreq-info
-        echo ""
-        read -p '🌍  Done? | Press [ENTER] ' typed < /dev/tty
-        ;;
+        gcestart ;;
+    5 )
+        gcestart ;;
+    6 )
+        gcestart ;;
+    7 )
+        gcestart ;;
+    A )
+        gcestart ;;
+    b )
+        gcestart ;;
     z )
         exit ;;
     Z )
@@ -56,8 +63,4 @@ case $typed in
 esac
 }
 
-rebootpro() {
-  bash /opt/plexguide/menu/processor/scripts/reboot.sh
-}
-
-question1
+gcestart
