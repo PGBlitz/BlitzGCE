@@ -22,7 +22,7 @@ tee <<-EOF
 
 1. Log Into the Account  : $account
 2. Project Interface     : $projectid
-3. Set Processor Count   : $processor
+3. Processor Count       : $processor
 4. NVME Drive Count      : $nvmecount
 5. Set IP Region / Server: $ipaddress - $ipregion
 6. Deploy GCE Server     : $serverstatus
