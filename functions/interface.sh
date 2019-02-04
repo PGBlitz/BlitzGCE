@@ -95,7 +95,7 @@ EOF
 
           # loops user back to exit if typed
           if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" ]]; then
-          projectinterface;; fi
+          projectinterface; fi
 
         # generates a random number within to prevent collision with other Google Projects; yes everyone!
         rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
