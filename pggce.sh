@@ -40,6 +40,7 @@ case $typed in
     1 )
         echo ""
         gcloud auth login --no-launch-browser --verbosity error
+        ### note --no-user-output-enabled
         gcestart ;;
     2 )
         gcestart ;;
