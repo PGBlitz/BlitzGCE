@@ -81,16 +81,23 @@ case $typed in
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Set Project Name                    ⚡ Reference: pggce.plexguide.com
+🌎  Create & Set a Project Name         ⚡ Reference: pggce.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
 and keep it all lower case! Failing to do so will result in naming
 issues.
 
+Quitting? Type >>> exit (all lowercase)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
         read -p 'Type Project Name | Press [ENTER]: ' projectname < /dev/tty
+
+          # loops user back to exit if typed
+          if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" ]]; then
+          projectinterface;; fi
+
+        # generates a random number within to prevent collision with other Google Projects; yes everyone!
         rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
         projectid="pg-$projectname-$rand"
         gcloud projects create $projectid
