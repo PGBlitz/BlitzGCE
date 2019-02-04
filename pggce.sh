@@ -38,6 +38,8 @@ read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
+        echo ""
+        gcloud auth login --no-launch-browser
         gcestart ;;
     2 )
         gcestart ;;
@@ -54,6 +56,10 @@ case $typed in
     7 )
         gcestart ;;
     A )
+        destroyserver
+        gcestart ;;
+    a )
+        destroyserver
         gcestart ;;
     b )
         gcestart ;;

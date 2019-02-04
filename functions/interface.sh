@@ -7,6 +7,19 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 
+destroyserver () {
+  ### what is location?
+  gcloud compute instances delete pg-gce --quiet --zone "$location"
+  rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
+
+tee <<-EOF
+
+🌎  NOTE: Server Destroyed
+EOF
+read -p 'Acknowledge | Press [ENTER]: ' typed < /dev/tty
+
+}
+
 nvmecount () {
 tee <<-EOF
 
