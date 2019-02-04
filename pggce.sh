@@ -23,7 +23,7 @@ tee <<-EOF
 1. Log Into the Account  : $account
 2. Project Interface     : $projectid
 3. Processor Count       : $processor
-4. NVME Drive Count      : $nvmecount
+4. NVME Drive Count      : 1 (NOT CODED YET)
 5. Set IP Region / Server: $ipaddress - $ipregion
 6. Deploy GCE Server     : $serverstatus
 7. SSH into the GCE Box  : $sshstatus
@@ -48,7 +48,7 @@ case $typed in
         processorcount
         gcestart ;;
     4 )
-        nvmecount
+        # nvmecount
         gcestart ;;
     5 )
         gcestart ;;
