@@ -99,8 +99,9 @@ EOF
 
         # generates a random number within to prevent collision with other Google Projects; yes everyone!
         rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
-        projectid="pg-$projectname-$rand"
-        gcloud projects create $projectid
+        projectid2="pg-$projectname-$rand"
+        gcloud projects create $projectid2
+        projectid=projectid2
         projectinterface ;;
     2 )
         projectinterface
