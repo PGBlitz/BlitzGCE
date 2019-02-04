@@ -18,10 +18,9 @@ drain. If usage is light, select 2. If for average use, 2 or 6 is fine.
 Only utilize 8 if the GCE will be used heavily!
 
 Instructions: Set the Processor Count (2 - 4 - 6 or 8)
-read -p 'Type NUMBER | Press [ENTER]: ' typed < /dev/tty
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-
 read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "2" || "$typed" == "4" || "$typed" == "6" || "$typed" == "8" ]]; then
