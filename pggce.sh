@@ -34,7 +34,7 @@ z. EXIT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
+read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
@@ -45,6 +45,7 @@ case $typed in
         processorcount
         gcestart ;;
     4 )
+        nvmecount
         gcestart ;;
     5 )
         gcestart ;;

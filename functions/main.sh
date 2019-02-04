@@ -20,12 +20,13 @@ variablepull () {
   variable /var/plexguide/project.ipaddress NOT-SET
   variable /var/plexguide/project.ipregion NOT-SET
   variable /var/plexguide/project.processor NOT-SET
+  variable /var/plexguide/project.nvme NOT-SET
 
   # variables being called
   account=$(cat /var/plexguide/project.account)
   ipaddress=$(cat /var/plexguide/project.ipaddress)
   ipregion=$(cat /var/plexguide/project.ipregion)
-  nvmecount=nvmecount
+  nvmecount=$(cat /var/plexguide/project.nvme)
   processor=$(cat /var/plexguide/project.processor)
   projectid=projectid
   serverstatus=serverstatus
