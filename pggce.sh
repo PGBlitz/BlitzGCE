@@ -39,7 +39,7 @@ read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 case $typed in
     1 )
         echo ""
-        gcloud auth login --no-launch-browser
+        gcloud auth login --no-launch-browser --verbosity error
         gcestart ;;
     2 )
         gcestart ;;
