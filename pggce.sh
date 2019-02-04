@@ -6,6 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/pggce/functions/main.sh
+source /opt/pggce/functions/interface.sh
 
 ### the primary interface for GCE
 gcestart () {
@@ -41,6 +42,7 @@ case $typed in
     2 )
         gcestart ;;
     3 )
+        processorcount
         gcestart ;;
     4 )
         gcestart ;;
