@@ -6,12 +6,6 @@
 # GNU:        General Public License v3.0
 ################################################################################
 
-# BAD INPUT
-badinput () {
-echo
-read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
-}
-
 ### assists in creating default variables if they do not exist
 variable () {
   file="$1"

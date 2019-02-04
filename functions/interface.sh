@@ -22,6 +22,8 @@ read -p 'Type NUMBER | Press [ENTER]: ' typed < /dev/tty
 
 EOF
 
+read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+
 if [[ "$typed" == "2" || "$typed" == "4" || "$typed" == "6" || "$typed" == "8" ]]; then
   echo "$typed" > /var/plexguide/project.processor; else processorcount; fi
 
