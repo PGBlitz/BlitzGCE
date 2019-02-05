@@ -138,6 +138,7 @@ EOF
         while [[ "$typed" -lt "1" || "$typed" -gt "$pnum" ]]; do
           infolist
           read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+          if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then exit; fi
         done
 
         projectinterface ;;
