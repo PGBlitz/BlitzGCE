@@ -104,7 +104,38 @@ EOF
         gcloud projects create $projectfinal
         projectinterface ;;
     1 )
-        projectinterface
+        pnum=0
+        mkdir -p /var/plexguide/prolist
+
+        echo "" > /var/plexguide/prolist/final.sh
+        gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
+
+        while read p; do
+          let "pnum++"
+          echo "$p" >> "/var/plexguide/prolist/$pnum"
+          echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+        done </var/plexguide/prolist/prolist.sh
+        prolist=$(cat /var/plexguide/prolist/prolist.sh)
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Utilize/Change Existing Project       ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUESTION: Which existing project will be utilized for the PG-GCE?
+
+$prolist
+
+Quitting? Type >>> exit (all lowercase)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+        typed=999999999
+        while [[ "$typed" -lt "0" && "$typed" -gt "$pnum" ]]; do
+          read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+        done
+
         projectinterface ;;
     3 )
         processorcount
