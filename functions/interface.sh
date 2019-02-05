@@ -139,7 +139,7 @@ EOF
         while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
           infolist
           read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
-          if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then exit; fi
+          if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then projectinterface; fi
         done
 
         typed=$(cat /var/plexguide/prolist/$typed2)
@@ -161,7 +161,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
         echo $typed > /var/plexguide/pgclone.project
-        echo 
+        echo
         read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
         variablepull
         projectinterface ;;
