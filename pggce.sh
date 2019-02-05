@@ -40,7 +40,8 @@ case $typed in
     1 )
         echo ""
         gcloud auth login --no-launch-browser --verbosity error
-        ### note --no-user-output-enabled
+        ### note --no-user-output-enabled | gcloud auth login --enable-gdrive-access --brief
+        # gcloud config configurations list
         gcestart ;;
     2 )
         projectinterface

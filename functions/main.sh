@@ -15,20 +15,26 @@ variable () {
 ### key variable pull
 variablepull () {
 
-  # sets variables if they do not exist
+  ### sets variables if they do not exist
   variable /var/plexguide/project.account NOT-SET
   variable /var/plexguide/project.ipaddress NOT-SET
   variable /var/plexguide/project.ipregion NOT-SET
   variable /var/plexguide/project.processor NOT-SET
   variable /var/plexguide/project.nvme NOT-SET
 
-  # variables being called
-  account=$(cat /var/plexguide/project.account)
+  ### variables being called
+
+  #account=$(cat /var/plexguide/project.account)
+  account=$(gcloud config configurations list | tail -n 1 | awk '{print $3}')
+
   ipaddress=$(cat /var/plexguide/project.ipaddress)
   ipregion=$(cat /var/plexguide/project.ipregion)
   nvmecount=$(cat /var/plexguide/project.nvme)
   processor=$(cat /var/plexguide/project.processor)
-  projectid=projectid
+
+  #projectid=projectid
+  project=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
+
   serverstatus=serverstatus
   sshstatus=notready
 }
