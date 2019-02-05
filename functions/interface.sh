@@ -122,13 +122,14 @@ EOF
 
         pnum=0
         mkdir -p /var/plexguide/prolist
+        rm -r /var/plexguide/prolist/*
 
         echo "" > /var/plexguide/prolist/final.sh
         gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
 
         while read p; do
           let "pnum++"
-          echo "$p" >> "/var/plexguide/prolist/$pnum"
+          echo "$p" > "/var/plexguide/prolist/$pnum"
           echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
         done </var/plexguide/prolist/prolist.sh
         prolist=$(cat /var/plexguide/prolist/final.sh)
