@@ -134,12 +134,31 @@ EOF
         prolist=$(cat /var/plexguide/prolist/final.sh)
 
         pnum=9
-        typed=999999999
-        while [[ "$typed" -lt "1" || "$typed" -gt "$pnum" ]]; do
+        typed2=999999999
+        while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
           infolist
           read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
-          if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then exit; fi
+          if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then exit; fi
         done
+
+        typed=$(cat /var/plexguide/prolist/$typed2)
+        gcloud config set project $typed
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 System Message: Enabling Drive API ~ Project $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+        gcloud services enable drive.googleapis.com --project $typed
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 System Message: Project Established ~ $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+        echo $typed > /var/plexguide/pgclone.project
+        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
         projectinterface ;;
     3 )
