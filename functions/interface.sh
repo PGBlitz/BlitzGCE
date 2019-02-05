@@ -132,7 +132,7 @@ EOF
           echo "$p" >> "/var/plexguide/prolist/$pnum"
           echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
         done </var/plexguide/prolist/prolist.sh
-        prolist=$(cat /var/plexguide/prolist/prolist.sh)
+        prolist=$(cat /var/plexguide/prolist/final.sh)
 
         pnum=9
         typed=999999999
