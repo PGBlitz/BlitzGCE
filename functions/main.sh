@@ -33,7 +33,7 @@ variablepull () {
   processor=$(cat /var/plexguide/project.processor)
 
   #projectid=projectid
-  project=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
+  projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
 
   serverstatus=serverstatus
   sshstatus=notready
