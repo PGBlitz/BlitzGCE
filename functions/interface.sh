@@ -109,11 +109,10 @@ infolist () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Utilize/Change Existing Project       ⚡ Reference: pggce.plexguide.com
+🌎  Utilize/Change Existing Project      ⚡ Reference: pggce.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 QUESTION: Which existing project will be utilized for the PG-GCE?
-
 $prolist
 
 Quitting? Type >>> exit (all lowercase)
