@@ -40,23 +40,6 @@ if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]
 }
 
 processorcount () {
-
-  infolist () {
-  tee <<-EOF
-
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  🌎  Utilize/Change Existing Project       ⚡ Reference: pggce.plexguide.com
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  QUESTION: Which existing project will be utilized for the PG-GCE?
-
-  $prolist
-
-  Quitting? Type >>> exit (all lowercase)
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  EOF
-  }
-
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -121,6 +104,23 @@ EOF
         gcloud projects create $projectfinal
         projectinterface ;;
     1 )
+
+infolist () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Utilize/Change Existing Project       ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUESTION: Which existing project will be utilized for the PG-GCE?
+
+$prolist
+
+Quitting? Type >>> exit (all lowercase)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+}
+
         pnum=0
         mkdir -p /var/plexguide/prolist
 
@@ -134,6 +134,7 @@ EOF
         done </var/plexguide/prolist/prolist.sh
         prolist=$(cat /var/plexguide/prolist/prolist.sh)
 
+        pnum=9
         typed=999999999
         while [[ "$typed" -lt "1" || "$typed" -gt "$pnum" ]]; do
           infolist
