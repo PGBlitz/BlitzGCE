@@ -249,9 +249,9 @@ EOF
         variablepull
         projectinterface ;;
     z )
-        exit ;;
+        gcestart ;;
     Z )
-        exit ;;
+        gcestart ;;
     * )
         processorcount ;;
 esac
