@@ -17,7 +17,6 @@ echo "" > /var/plexguide/prolist/final.sh
 gcloud compute regions list | awk '{print $1}' | tail -n +2 > /var/plexguide/prolist/1.output
 awk '{print substr($0, 1, length($0)-1)}' /var/plexguide/prolist/1.output > /var/plexguide/prolist/2.output
 sort -u /var/plexguide/prolist/2.output > /var/plexguide/prolist/1.output
-cat /var/plexguide/prolist/1.output
 
 while read p; do
   let "pnum++"
@@ -28,6 +27,7 @@ prolist=$(cat /var/plexguide/prolist/1.output)
 
 pnum=9
 typed2=999999999
+profinal=$(cat /var/plexguide/prolist/final.sh)
 while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
 
   tee <<-EOF
@@ -36,7 +36,7 @@ while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
 🚀 Select a GCE Region
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-$prolist
+$profinal
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
