@@ -27,10 +27,9 @@ tee <<-EOF
 1. Log Into the Account  : $account
 2. Project Interface     : $projectid
 3. Processor Count       : $processor
-4. NVME Drive Count      : 1 (NOT CODED YET)
-5. Set IP Region / Server: $ipaddress [$ipregion]
-6. Deploy GCE Server     : $gcedeployedcheck
-7. SSH into the GCE Box
+4. Set IP Region / Server: $ipaddress [$ipregion]
+5. Deploy GCE Server     : $gcedeployedcheck
+6. SSH into the GCE Box
 
 a. Destroy Server
 z. EXIT
@@ -54,15 +53,12 @@ case $typed in
         processorcount
         gcestart ;;
     4 )
-        # nvmecount
-        gcestart ;;
-    5 )
         regioncenter
         gcestart ;;
-    6 )
+    5 )
         deployserver
         gcestart ;;
-    7 )
+    6 )
         if [[ "$gcedeployedcheck" == "Deployed" ]]; then
           sshdeployed
         else
@@ -73,9 +69,7 @@ case $typed in
         gcestart ;;
     a )
         destroyserver
-        gcestart ;;
-    b )
-        gcestart ;;
+        gcestart ;;    
     z )
         exit ;;
     Z )
