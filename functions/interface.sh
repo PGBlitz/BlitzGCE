@@ -30,6 +30,8 @@ location! Ensure that everything is set before deploying the GCE Server!
 INSTRUCTIONS: Quit Being a BoneHead and Read!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+read -p '↘️  Acknowledge Being a BoneHead | Press [ENTER] ' typed < /dev/tty
+
 gcestart
 fi
 }
