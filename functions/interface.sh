@@ -100,6 +100,10 @@ EOF
         echo "" > /var/plexguide/prolist/final.sh
         gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
 
+        ### project no exist check
+        pcheck=$(cat /var/plexguide/prolist/prolist.sh)
+        if [[ "$pcheck" == "" ]]; then noprojects; fi
+
         while read p; do
           let "pnum++"
           echo "$p" > "/var/plexguide/prolist/$pnum"
@@ -192,6 +196,10 @@ EOF
         echo "" > /var/plexguide/prolist/final.sh
         gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
 
+        ### project no exist check
+        pcheck=$(cat /var/plexguide/prolist/prolist.sh)
+        if [[ "$pcheck" == "" ]]; then noprojects; fi
+
         while read p; do
           let "pnum++"
           echo "$p" > "/var/plexguide/prolist/$pnum"
@@ -229,4 +237,22 @@ EOF
         processorcount ;;
 esac
 
+}
+
+### Function for if no projects exists
+noprojects () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  No Projects Exist                     ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WARNING: No projects exists! 
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+
+### go back to main project interface
+projectinterface
 }
