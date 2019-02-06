@@ -92,6 +92,7 @@ tee <<-EOF
 🚀 Finalizing - Assinged IP Address to Instance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+  variablepull
   echo
   gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipzone --quiet
 
