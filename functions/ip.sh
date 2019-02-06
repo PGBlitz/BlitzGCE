@@ -46,10 +46,12 @@ typed=$(cat /var/plexguide/prolist/$typed2)
 echo $typed > /var/plexguide/project.ipregion
 region=typed
 
+echo
 variablepull
 gcloud compute addresses create pg-gce --region ${typed}1 --project $projectid
 gcloud compute addresses list | grep pg-gce | awk '{print $2}' > /var/plexguide/project.ipaddress
 gcloud compute addresses list | grep pg-gce | awk '{print $3}' > /var/plexguide/project.ipregion
 
+read -p '↘️  IP Address & Region Set | Press [ENTER] ' typed < /dev/tty
 
 }
