@@ -20,7 +20,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
   gcestart
   fi
 
@@ -45,11 +45,11 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-        rm -rf /var/plexguide/project.zone
-        rm -rf /var/plexguide/project.ipregion
-        rm -rf /var/plexguide/project.ipaddress
-        gcloud compute addresses delete pg-gce --region $ipregion --quiet
-        rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
+  rm -rf /var/plexguide/project.zone
+  rm -rf /var/plexguide/project.ipregion
+  rm -rf /var/plexguide/project.ipaddress
+  gcloud compute addresses delete pg-gce --region $ipregion --quiet
+  rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
 tee <<-EOF
 
@@ -59,7 +59,5 @@ tee <<-EOF
 
 EOF
 
-        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-
-tee <<-EOF
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 }
