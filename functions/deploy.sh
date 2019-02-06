@@ -32,6 +32,8 @@ tee <<-EOF
 🚀 Deleting Old PG Template
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+gcloud compute instance-templates delete pg-gce-blueprint --quiet
+
 EOF
 fi
 
@@ -50,6 +52,13 @@ fi
   gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipregion-a
 
   ### Assigning the IP Address to GCE Box
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Finalizing - Assinged IP Address to Instance
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
   echo
   gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --quiet
 
