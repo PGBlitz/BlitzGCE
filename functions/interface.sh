@@ -8,8 +8,8 @@
 source /opt/pggce/functions/main.sh
 
 destroyserver () {
-  variablepull
-  gcloud compute instances delete pg-gce --quiet --zone ${ipregion}
+  zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
+  gcloud compute instances delete pg-gce --quiet --zone $zone
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
   #echo "NOT-SET" > ipstuff
 
