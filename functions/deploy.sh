@@ -35,15 +35,15 @@ tee <<-EOF
 EOF
 fi
 
+  ### Recalls Variables
+  variablepull
+
   ### Deploys the PG Template
   gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $cpu --custom-memory 8GB \
+  --custom-cpu $processor --custom-memory 8GB \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
   --boot-disk-auto-delete --boot-disk-size 200GB \
   --local-ssd interface=nvme
-
-  ### Recalls Variables
-  variablepull
 
   ### Deploy the GCE Server
   echo
