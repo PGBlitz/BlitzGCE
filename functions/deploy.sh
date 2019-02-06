@@ -13,7 +13,6 @@ deployserver () {
   rulecheck=$(gcloud compute firewall-rules list | grep plexguide)
   if [[ "$rulescheck" == "" ]]; then
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Creating Firewall Rules | Does Not Exist
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -46,13 +45,13 @@ fi
   ### Recalls Variables
   variablepull
 
-  ### Deploy the GCE Server  
+  ### Deploy the GCE Server
   echo
-  gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipregion
+  gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipregion-a
 
   ### Assigning the IP Address to GCE Box
   echo
-  gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipregion --quiet
+  gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --quiet
 
   echo
   gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --address $ipaddress
