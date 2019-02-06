@@ -8,8 +8,8 @@
 source /opt/pggce/functions/main.sh
 
 destroyserver () {
-  ### what is location?
-  gcloud compute instances delete pg-gce --quiet --zone "$location"
+  variablepull
+  gcloud compute instances delete pg-gce --quiet --zone ${ipregion}1
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
 tee <<-EOF
