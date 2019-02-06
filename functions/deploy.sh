@@ -8,7 +8,8 @@
 source /opt/pggce/functions/main.sh
 
 deployserver () {
-
+  ### checks to make sure common variables are filled out
+deployfail
   ### prevents deployment if one exists!
 servercheck
   if [[ "$gcedeployedcheck" == "Deployed" ]]; then
