@@ -34,7 +34,7 @@ tee <<-EOF
 
 EOF
 gcloud compute instance-templates delete pg-gce-blueprint --quiet
-echo 
+echo
 fi
 
   ### Recalls Variables
@@ -57,7 +57,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Finalizing - Assinged IP Address to Instance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
   echo
   gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --quiet
