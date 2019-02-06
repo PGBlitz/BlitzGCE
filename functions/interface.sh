@@ -8,6 +8,22 @@
 source /opt/pggce/functions/main.sh
 
 destroyserver () {
+
+  ### checking to making sure there is a server deployed to destroy
+  destorycheck=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $1}')
+  if [[ "$destroycheck" != "pg-gce" ]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 System Message: No PG-GCE Server is Deployed! Exiting!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+  gcestart
+  fi
+
+  ### starting process
   echo
   variablepull
   zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
