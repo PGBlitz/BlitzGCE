@@ -16,7 +16,8 @@ gcestart () {
 
   ### call key variables ~ /functions/main.sh
   variablepull
-
+  servercheck
+  
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
