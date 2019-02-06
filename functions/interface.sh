@@ -235,7 +235,7 @@ EOF
         done
 
         typed=$(cat /var/plexguide/prolist/$typed2)
-        gcloud projects delete $typed
+        gcloud projects delete "$typed"
 
 tee <<-EOF
 

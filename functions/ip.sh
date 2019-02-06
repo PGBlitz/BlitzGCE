@@ -8,20 +8,43 @@
 source /opt/pggce/functions/main.sh
 
 nvmecount () {
-tee <<-EOF
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  NVME Count                          ⚡ Reference: pggce.plexguide.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Most users will only need to utilize 1 -2 NVME Drives. The more, the
-faster the processing, but the faster your credits drain. If intent is to
-be in beast mode during the GCE's duration, 3 - 4 is acceptable.
+pnum=0
+mkdir -p /var/plexguide/prolist
+rm -r /var/plexguide/prolist/*
 
-INSTRUCTIONS: Set the NVME Count ~ 1/2/3/4
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+echo "" > /var/plexguide/prolist/final.sh
+gcloud compute regions list | awk '{print $1}' | tail -n +2 > /tmp/1.txt
+awk '{print substr($0, 1, length($0)-1)}' /tmp/1.txt > /tmp/2.txt
+sort -u /tmp/2.txt > /tmp/1.txt
+cat /tmp/1.txt
 
-if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]]; then
-  echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
+gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
+
+### prevent bonehead from deleting the project that is active!
+variablepull
+sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
+
+### project no exist check
+pcheck=$(cat /var/plexguide/prolist/prolist.sh)
+if [[ "$pcheck" == "" ]]; then noprojects; fi
+
+while read p; do
+  let "pnum++"
+  echo "$p" > "/var/plexguide/prolist/$pnum"
+  echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+done </var/plexguide/prolist/prolist.sh
+prolist=$(cat /var/plexguide/prolist/final.sh)
+
+pnum=9
+typed2=999999999
+while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
+  existlist
+  read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
+  if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then projectinterface; fi
+done
+
+typed=$(cat /var/plexguide/prolist/$typed2)
+gcloud projects delete "$typed"
+
 }
