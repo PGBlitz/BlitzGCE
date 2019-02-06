@@ -11,7 +11,7 @@ deployserver () {
 
   ### builds plexguide firewall if it does not exist
   rulecheck=$(gcloud compute firewall-rules list | grep plexguide)
-  if [[ "$rulescheck" == "" ]]; then
+  if [[ "$rulecheck" == "" ]]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Creating Firewall Rules | Does Not Exist
@@ -54,6 +54,6 @@ fi
   gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --quiet
 
   echo
-  gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --address $ipaddress
+  gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --address $ipaddress
 
 }
