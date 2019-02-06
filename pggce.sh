@@ -8,6 +8,7 @@
 source /opt/pggce/functions/main.sh
 source /opt/pggce/functions/interface.sh
 source /opt/pggce/functions/ip.sh
+source /opt/pggce/functions/deploy.sh
 
 ### the primary interface for GCE
 gcestart () {
@@ -57,6 +58,7 @@ case $typed in
         regioncenter
         gcestart ;;
     6 )
+        deployserver
         gcestart ;;
     7 )
         gcestart ;;
