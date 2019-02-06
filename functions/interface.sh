@@ -28,7 +28,7 @@ EOF
   echo
   variablepull
   zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
-  ipdelete=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}')
+  #ipdelete=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}')
   echo
 
 tee <<-EOF
@@ -38,19 +38,19 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-  gcloud compute instances delete pg-gce --quiet --zone $ipzone
-  gcloud compute addresses delete pg-gce --region=$ipdelete --quiet
-  rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
+  gcloud compute instances delete pg-gce --zone $ipzone --quiet
 
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: Releasing IP Address
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         rm -rf /var/plexguide/project.zone
         rm -rf /var/plexguide/project.ipregion
-        echo
+        gcloud compute addresses delete pg-gce --region $ipregion --quiet
+        rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
 tee <<-EOF
 
