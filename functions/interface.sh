@@ -67,7 +67,7 @@ tee <<-EOF
 Project ID: $projectid
 
 [1] Utilize/Change Existing Project
-[2] Set New Project
+[2] Build a New Project
 [3] Destroy Existing Project
 [Z] Exit
 
@@ -169,7 +169,22 @@ EOF
         rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
         projectfinal="pg-$projectname-$rand"
         gcloud projects create $projectfinal
-        projectinterface ;;
+
+        tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Project Message                       ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INFO: $projectfinal created! Ensure to set it as your default for an
+existing intnerface afterwards!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p 'Type y or n | Press [ENTER]: ' typed < /dev/tty
+
+projectinterface ;;
+
     3 )
 existlist () {
 tee <<-EOF
@@ -247,7 +262,7 @@ tee <<-EOF
 🌎  No Projects Exist                     ⚡ Reference: pggce.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-WARNING: No projects exists! 
+WARNING: No projects exists!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
