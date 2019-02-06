@@ -24,8 +24,9 @@ nvmecount () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  NVME Count                          ⚡ Reference: pggce.plexguide.com
+🌎  NVME Count
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Most users will only need to utilize 1 -2 NVME Drives. The more, the
 faster the processing, but the faster your credits drain. If intent is to
 be in beast mode during the GCE's duration, 3 - 4 is acceptable.
@@ -43,9 +44,10 @@ processorcount () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Processor Count                     ⚡ Reference: pggce.plexguide.com
+🌎  Processor Count
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Information: The processor count utilizes can affect how fast your credits
+
+INFORMATION: The processor count utilizes can affect how fast your credits
 drain. If usage is light, select 2. If for average use, 2 or 6 is fine.
 Only utilize 8 if the GCE will be used heavily!
 
@@ -62,8 +64,10 @@ projectinterface () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Project Interface                   ⚡ Reference: pggce.plexguide.com
+🌎  Project Interface
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚡ Reference: pggce.plexguide.com
+
 Project ID: $projectid
 
 [1] Utilize/Change Existing Project
@@ -147,7 +151,7 @@ EOF
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Create & Set a Project Name         ⚡ Reference: pggce.plexguide.com
+🌎  Create & Set a Project Name
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
