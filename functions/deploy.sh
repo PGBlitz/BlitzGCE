@@ -32,9 +32,9 @@ tee <<-EOF
 🚀 Deleting Old PG Template
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-gcloud compute instance-templates delete pg-gce-blueprint --quiet
-
 EOF
+gcloud compute instance-templates delete pg-gce-blueprint --quiet
+echo 
 fi
 
   ### Recalls Variables
