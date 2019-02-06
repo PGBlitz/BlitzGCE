@@ -111,7 +111,6 @@ EOF
         done </var/plexguide/prolist/prolist.sh
         prolist=$(cat /var/plexguide/prolist/final.sh)
 
-        pnum=9
         typed2=999999999
         while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
           infolist
@@ -226,7 +225,6 @@ EOF
         done </var/plexguide/prolist/prolist.sh
         prolist=$(cat /var/plexguide/prolist/final.sh)
 
-        pnum=9
         typed2=999999999
         while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
           existlist

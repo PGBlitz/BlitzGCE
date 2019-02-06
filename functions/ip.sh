@@ -24,7 +24,6 @@ while read p; do
   echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
 done </var/plexguide/prolist/1.output
 
-pnum=9
 typed2=999999999
 profinal=$(cat /var/plexguide/prolist/final.sh)
 while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
