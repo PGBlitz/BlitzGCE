@@ -9,6 +9,7 @@ source /opt/pggce/functions/main.sh
 source /opt/pggce/functions/interface.sh
 source /opt/pggce/functions/ip.sh
 source /opt/pggce/functions/deploy.sh
+source /opt/pggce/functions/main.sh
 
 ### the primary interface for GCE
 gcestart () {
