@@ -62,8 +62,4 @@ EOF
         read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 tee <<-EOF
-
-EOF
-read -p '🌎  Server Destroyed | Press [ENTER] ' typed < /dev/tty
-
 }

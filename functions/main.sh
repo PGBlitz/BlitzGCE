@@ -40,3 +40,8 @@ variablepull () {
   serverstatus=serverstatus
   sshstatus=notready
 }
+
+servercheck () {
+  temp55=$(cat gcloud compute addresses list | grep pg-gce)
+  if [[ "$temp55" != "" ]]; then gcedeployedcheck="Deployed"; else gcedeployedcheck="Not Deployed"; fi
+}

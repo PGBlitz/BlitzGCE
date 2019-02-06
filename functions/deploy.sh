@@ -7,7 +7,21 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 
+### deletes deployed ip if it exists for some odd reason
 deployserver () {
+  ipcheck=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}' | grep ".")
+  if [[ "$ipcheck" != "" ]]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Deleting Old IP Address
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+
+variablepull
+gcloud compute addresses delete pg-gce --region $ipregion --quiet
+echo
+fi
 
   ### builds plexguide firewall if it does not exist
   rulecheck=$(gcloud compute firewall-rules list | grep plexguide)
