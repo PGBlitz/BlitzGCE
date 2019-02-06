@@ -8,6 +8,7 @@
 source /opt/pggce/functions/main.sh
 
 destroyserver () {
+  echo
   zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
   gcloud compute instances delete pg-gce --quiet --zone $zone
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
@@ -15,9 +16,8 @@ destroyserver () {
 
 tee <<-EOF
 
-🌎  NOTE: Server Destroyed
 EOF
-read -p 'Acknowledge | Press [ENTER]: ' typed < /dev/tty
+read -p '🌎  Server Destroyed | Press [ENTER]: ' typed < /dev/tty
 
 }
 
