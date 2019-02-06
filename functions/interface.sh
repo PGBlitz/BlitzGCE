@@ -104,6 +104,9 @@ EOF
         pcheck=$(cat /var/plexguide/prolist/prolist.sh)
         if [[ "$pcheck" == "" ]]; then noprojects; fi
 
+        variablepull
+        sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
+
         while read p; do
           let "pnum++"
           echo "$p" > "/var/plexguide/prolist/$pnum"
