@@ -11,9 +11,22 @@ destroyserver () {
   echo
   variablepull
   zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
-  gcloud compute instances delete pg-gce --quiet --zone $ipzone
+  ipdelete=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}')
+  echo
+  gcloud compute instances delete pg-gce --quiet --zone "$ipzone"
+  gcloud compute addresses delete pg-gce --region="$ipdelete" --quiet
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
-  #echo "NOT-SET" > ipstuff
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 System Message: Project Deleted ~ $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+        rm -rf /var/plexguide/project.zone
+        rm -rf /var/plexguide/project.ipregion
+        echo
+        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 tee <<-EOF
 
