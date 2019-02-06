@@ -30,7 +30,7 @@ variablepull () {
 
   ipaddress=$(cat /var/plexguide/project.ipaddress)
   ipregion=$(cat /var/plexguide/project.ipregion)
-  ipregion=$(cat /var/plexguide/project.ipzone)
+  ipzone=$(cat /var/plexguide/project.ipzone)
   nvmecount=$(cat /var/plexguide/project.nvme)
   processor=$(cat /var/plexguide/project.processor)
 
