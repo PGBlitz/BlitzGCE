@@ -28,7 +28,7 @@ EOF
 gcestart; fi
 
 ### deletes deployed ip if it exists for some odd reason
-  ipcheck=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}' | grep ".")
+  ipcheck=$(gcloud compute instances list | grep pg-gce | head -n +1 | awk '{print $2}' | grep ".")
   if [[ "$ipcheck" != "" ]]; then
 tee <<-EOF
 
