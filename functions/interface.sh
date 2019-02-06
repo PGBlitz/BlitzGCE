@@ -104,6 +104,7 @@ EOF
         pcheck=$(cat /var/plexguide/prolist/prolist.sh)
         if [[ "$pcheck" == "" ]]; then noprojects; fi
 
+        ### prevent bonehead from deleting the project that is active!
         variablepull
         sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
 
