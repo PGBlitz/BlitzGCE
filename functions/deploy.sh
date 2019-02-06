@@ -49,7 +49,7 @@ fi
 
   ### Deploy the GCE Server
   echo
-  gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipregion-a
+  gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipzone
 
   ### Assigning the IP Address to GCE Box
 tee <<-EOF
@@ -59,9 +59,9 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   echo
-  gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --quiet
+  gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipzone --quiet
 
   echo
-  gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --zone $ipregion-a --address $ipaddress
+  gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --zone $ipzone --address $ipaddress
 
 }
