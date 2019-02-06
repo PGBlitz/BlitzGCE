@@ -76,33 +76,6 @@ EOF
 read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
-    2 )
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Create & Set a Project Name         ⚡ Reference: pggce.plexguide.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
-and keep it all lower case! Failing to do so will result in naming
-issues.
-
-Quitting? Type >>> exit (all lowercase)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-        read -p 'Type Project Name | Press [ENTER]: ' projectname < /dev/tty
-        echo ""
-
-          # loops user back to exit if typed
-          if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" ]]; then
-          projectinterface; fi
-
-        # generates a random number within to prevent collision with other Google Projects; yes everyone!
-        rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
-        projectfinal="pg-$projectname-$rand"
-        gcloud projects create $projectfinal
-        projectinterface ;;
     1 )
 
 infolist () {
@@ -165,8 +138,88 @@ EOF
         read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
         variablepull
         projectinterface ;;
+
+        2 )
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Create & Set a Project Name         ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
+and keep it all lower case! Failing to do so will result in naming
+issues.
+
+Quitting? Type >>> exit (all lowercase)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+        read -p 'Type Project Name | Press [ENTER]: ' projectname < /dev/tty
+        echo ""
+
+          # loops user back to exit if typed
+          if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" ]]; then
+          projectinterface; fi
+
+        # generates a random number within to prevent collision with other Google Projects; yes everyone!
+        rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
+        projectfinal="pg-$projectname-$rand"
+        gcloud projects create $projectfinal
+        projectinterface ;;
     3 )
-        processorcount
+existlist () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Delete Existing Projects              ⚡ Reference: pggce.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WARNING : Deleting projects will result in deleting keys that are
+associated with it! Be careful in what your doing!
+
+QUESTION: Which existing project will be deleted?
+$prolist
+
+Quitting? Type >>> exit (all lowercase)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+}
+
+        pnum=0
+        mkdir -p /var/plexguide/prolist
+        rm -r /var/plexguide/prolist/*
+
+        echo "" > /var/plexguide/prolist/final.sh
+        gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
+
+        while read p; do
+          let "pnum++"
+          echo "$p" > "/var/plexguide/prolist/$pnum"
+          echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+        done </var/plexguide/prolist/prolist.sh
+        prolist=$(cat /var/plexguide/prolist/final.sh)
+
+        pnum=9
+        typed2=999999999
+        while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
+          existlistlist
+          read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
+          if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then projectinterface; fi
+        done
+
+        typed=$(cat /var/plexguide/prolist/$typed2)
+        gcloud projects delete $typed
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 System Message: Project Deleted ~ $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+        echo $typed > /var/plexguide/pgclone.project
+        echo
+        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+        variablepull
         projectinterface ;;
     z )
         exit ;;
