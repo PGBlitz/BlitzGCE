@@ -28,8 +28,8 @@ tee <<-EOF
 3. Processor Count       : $processor
 4. NVME Drive Count      : 1 (NOT CODED YET)
 5. Set IP Region / Server: $ipaddress [$ipregion]
-6. Deploy GCE Server     : $serverstatus
-7. SSH into the GCE Box  : $sshstatus
+6. Deploy GCE Server     : $gcedeployedcheck
+7. SSH into the GCE Box
 
 a. Destroy Server
 z. EXIT
@@ -62,7 +62,14 @@ case $typed in
         deployserver
         gcestart ;;
     7 )
-        gcestart ;;
+        gcestart
+        if [[ "$gcedeployedcheck" == "Deployed" ]]; then
+        gcedeploystart
+        else
+        gcedeployedfailed
+        fi
+        gcestart
+        ;;
     A )
         destroyserver
         gcestart ;;
