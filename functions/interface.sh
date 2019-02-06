@@ -11,7 +11,7 @@ destroyserver () {
 
   ### checking to making sure there is a server deployed to destroy
   destorycheck=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $1}')
-  if [[ "$destroycheck" != "pg-gce" ]]; then
+  if [[ "$destorycheck" == "" ]]; then
 
 tee <<-EOF
 
