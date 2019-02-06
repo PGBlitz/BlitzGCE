@@ -17,7 +17,7 @@ destroyserver () {
 tee <<-EOF
 
 EOF
-read -p '🌎  Server Destroyed | Press [ENTER]: ' typed < /dev/tty
+read -p '🌎  Server Destroyed | Press [ENTER] ' typed < /dev/tty
 
 }
 
