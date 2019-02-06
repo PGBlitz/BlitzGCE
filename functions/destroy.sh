@@ -29,10 +29,8 @@ EOF
   variablepull
   zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
   #ipdelete=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}')
-  echo
 
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: Destroying Server
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
