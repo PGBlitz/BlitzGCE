@@ -104,10 +104,6 @@ EOF
         pcheck=$(cat /var/plexguide/prolist/prolist.sh)
         if [[ "$pcheck" == "" ]]; then noprojects; fi
 
-        ### prevent bonehead from deleting the project that is active!
-        variablepull
-        sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
-
         while read p; do
           let "pnum++"
           echo "$p" > "/var/plexguide/prolist/$pnum"
@@ -218,6 +214,10 @@ EOF
         ### project no exist check
         pcheck=$(cat /var/plexguide/prolist/prolist.sh)
         if [[ "$pcheck" == "" ]]; then noprojects; fi
+
+        ### prevent bonehead from deleting the project that is active!
+        variablepull
+        sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
 
         while read p; do
           let "pnum++"
