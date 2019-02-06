@@ -43,6 +43,6 @@ variablepull () {
 
 servercheck () {
   temp55=$(gcloud compute addresses list | grep pg-gce)
-  if [[ "$temp55" != "" ]]; then gcedeployedcheck="Deployed";
-  else gcedeployedcheck="Not Deployed"; fi
+  if [[ "$temp55" != "" ]]; then gcedeployedcheck="DEPLOYED";
+else gcedeployedcheck="NOT DEPLOYED"; fi
 }
