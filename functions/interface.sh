@@ -294,3 +294,9 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 ### go back to main project interface
 projectinterface
 }
+
+sshdeploy ()
+{
+  variablepull
+  gcloud compute ssh pg-gce --zone "$ipzone"
+}

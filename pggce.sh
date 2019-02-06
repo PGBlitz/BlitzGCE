@@ -17,7 +17,7 @@ gcestart () {
   ### call key variables ~ /functions/main.sh
   variablepull
   servercheck
-  
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -63,14 +63,11 @@ case $typed in
         deployserver
         gcestart ;;
     7 )
-        gcestart
         if [[ "$gcedeployedcheck" == "Deployed" ]]; then
-        gcedeploystart
+          sshdeployed
         else
-        gcedeployedfailed
-        fi
-        gcestart
-        ;;
+          gcestart
+        fi ;;
     A )
         destroyserver
         gcestart ;;
