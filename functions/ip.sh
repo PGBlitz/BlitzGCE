@@ -47,7 +47,7 @@ echo $typed > /var/plexguide/project.ipregion
 region=typed
 
 variablepull
-gcloud compute addresses create pg-gce --region ${typed}-1 --project $projectid
+gcloud compute addresses create pg-gce --region ${typed}1 --project $projectid
 gcloud compute addresses list | grep pg-gce | awk '{print $3}' > /var/plexguide/project.ipaddress
 
 
