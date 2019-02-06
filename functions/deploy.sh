@@ -7,8 +7,25 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 
-### deletes deployed ip if it exists for some odd reason
 deployserver () {
+
+  ### prevents deployment if one exists!
+servercheck
+  if [[ "$gcedeployedcheck" == "Deployed" ]]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 ERROR: GCE Instance Detected
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INFORMATION: The prior GCE Server must be deleted prior to deloying a
+another one! Exiting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+gcestart; fi
+
+### deletes deployed ip if it exists for some odd reason
   ipcheck=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}' | grep ".")
   if [[ "$ipcheck" != "" ]]; then
 tee <<-EOF
