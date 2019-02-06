@@ -10,7 +10,7 @@ source /opt/pggce/functions/main.sh
 destroyserver () {
 
   ### checking to making sure there is a server deployed to destroy
-  destorycheck=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $1}')
+  destorycheck=$(gcloud compute instances list | grep pg-gce | head -n +1 | awk '{print $1}')
   if [[ "$destorycheck" == "" ]]; then
 
 tee <<-EOF
