@@ -7,34 +7,24 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 
-nvmecount () {
+regioncenter () {
 
 pnum=0
 mkdir -p /var/plexguide/prolist
 rm -r /var/plexguide/prolist/*
 
 echo "" > /var/plexguide/prolist/final.sh
-gcloud compute regions list | awk '{print $1}' | tail -n +2 > /tmp/1.txt
-awk '{print substr($0, 1, length($0)-1)}' /tmp/1.txt > /tmp/2.txt
-sort -u /tmp/2.txt > /tmp/1.txt
-cat /tmp/1.txt
-
-gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
-
-### prevent bonehead from deleting the project that is active!
-variablepull
-sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
-
-### project no exist check
-pcheck=$(cat /var/plexguide/prolist/prolist.sh)
-if [[ "$pcheck" == "" ]]; then noprojects; fi
+gcloud compute regions list | awk '{print $1}' | tail -n +2 > /var/plexguide/prolist/1.output
+awk '{print substr($0, 1, length($0)-1)}' /var/plexguide/prolist/1.output > /var/plexguide/prolist/2.output
+sort -u /var/plexguide/prolist/2.output > /var/plexguide/prolist/1.output
+cat /var/plexguide/prolist/1.output
 
 while read p; do
   let "pnum++"
   echo "$p" > "/var/plexguide/prolist/$pnum"
   echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
 done </var/plexguide/prolist/prolist.sh
-prolist=$(cat /var/plexguide/prolist/final.sh)
+prolist=$(cat /var/plexguide/prolist/1.output)
 
 pnum=9
 typed2=999999999
@@ -45,6 +35,6 @@ while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
 done
 
 typed=$(cat /var/plexguide/prolist/$typed2)
-gcloud projects delete "$typed"
+echo##########
 
 }

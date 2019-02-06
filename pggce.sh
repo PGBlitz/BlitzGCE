@@ -7,6 +7,7 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 source /opt/pggce/functions/interface.sh
+source /opt/pggce/functions/ip.sh
 
 ### the primary interface for GCE
 gcestart () {
@@ -53,6 +54,7 @@ case $typed in
         # nvmecount
         gcestart ;;
     5 )
+        regioncenter
         gcestart ;;
     6 )
         gcestart ;;
