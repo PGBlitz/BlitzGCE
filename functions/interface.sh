@@ -211,13 +211,13 @@ EOF
         echo "" > /var/plexguide/prolist/final.sh
         gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
 
-        ### project no exist check
-        pcheck=$(cat /var/plexguide/prolist/prolist.sh)
-        if [[ "$pcheck" == "" ]]; then noprojects; fi
-
         ### prevent bonehead from deleting the project that is active!
         variablepull
         sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
+
+        ### project no exist check
+        pcheck=$(cat /var/plexguide/prolist/prolist.sh)
+        if [[ "$pcheck" == "" ]]; then noprojects; fi
 
         while read p; do
           let "pnum++"
@@ -266,7 +266,8 @@ tee <<-EOF
 🌎  No Projects Exist                     ⚡ Reference: pggce.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-WARNING: No projects exists!
+WARNING: No projects exists! Cannot delete the default active project if
+that exists!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
