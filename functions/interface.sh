@@ -7,6 +7,32 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 
+deployfail () {
+
+gcefail="off"
+
+fail1=$(cat /var/plexguide/project.ipregion)
+fail2=$(cat /var/plexguide/project.processor)
+fail3=$(cat /var/plexguide/project.account)
+
+if [[ "$fail1" == "NOT-SET" || "$fail2" == "NOT-SET" || "$fail3" == "NOT-SET" ]]; then
+  gcefail="on"; fi
+
+if [[ "$gcefail" == "on" ]]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  Deployment Checks Failed!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Failed to set the processer count, log in, and/or set your server
+location! Ensure that everything is set before deploying the GCE Server!
+
+INSTRUCTIONS: Quit Being a BoneHead and Read!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+fi
+}
+
 nvmecount () {
 tee <<-EOF
 
