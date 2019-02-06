@@ -22,8 +22,7 @@ while read p; do
   let "pnum++"
   echo "$p" > "/var/plexguide/prolist/$pnum"
   echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
-done </var/plexguide/prolist/prolist.sh
-prolist=$(cat /var/plexguide/prolist/1.output)
+done </var/plexguide/prolist/1.output
 
 pnum=9
 typed2=999999999
