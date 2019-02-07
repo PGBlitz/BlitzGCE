@@ -324,6 +324,10 @@ that exists!
 EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
+### go back to main project interface
+projectinterface
+}
+
 projectdeny () {
 if [[ $(cat /var/plexguide/project.id) == "NOT-SET" ]]; then
 tee <<-EOF
@@ -343,10 +347,6 @@ read -p '↘️  Acknowledge Error | Press [ENTER] ' typed < /dev/tty
 gcestart
 fi
 
-}
-
-### go back to main project interface
-projectinterface
 }
 
 sshdeploy ()
