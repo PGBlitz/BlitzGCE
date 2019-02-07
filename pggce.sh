@@ -60,7 +60,7 @@ case $typed in
         gcestart ;;
     6 )
         if [[ "$gcedeployedcheck" == "Deployed" ]]; then
-          sshdeployed
+          sshdeploy
         else
           gcestart
         fi ;;
@@ -69,7 +69,7 @@ case $typed in
         gcestart ;;
     a )
         destroyserver
-        gcestart ;;    
+        gcestart ;;
     z )
         exit ;;
     Z )
