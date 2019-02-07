@@ -13,15 +13,15 @@ deployserver () {
 deployfail
   ### prevents deployment if one exists!
 servercheck
-  if [[ "$gcedeployedcheck" == "Deployed" ]]; then
+  if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 ERROR: GCE Instance Detected
+🚀 ERROR: PG GCE Instance Already Detected
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 INFORMATION: The prior GCE Server must be deleted prior to deloying a
-another one! Exiting
+another one! Exiting!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
