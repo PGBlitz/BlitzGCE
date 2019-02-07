@@ -115,7 +115,7 @@ EOF
 
         pnum=0
         mkdir -p /var/plexguide/prolist
-        rm -r /var/plexguide/prolist/*
+        rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
         echo "" > /var/plexguide/prolist/final.sh
         gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
@@ -234,7 +234,7 @@ EOF
 
         pnum=0
         mkdir -p /var/plexguide/prolist
-        rm -r /var/plexguide/prolist/*
+        rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
         echo "" > /var/plexguide/prolist/final.sh
         gcloud projects list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/prolist/prolist.sh
