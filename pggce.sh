@@ -22,7 +22,8 @@ gcestart () {
   if [[ "$othercheck" != "NOT-SET" ]]; then servercheck
 else
   account=NOT-SET
-  projectid=NOT-SET; fi
+  projectid=NOT-SET
+  gcedeployedcheck=NOT-SET; fi
 
 tee <<-EOF
 
