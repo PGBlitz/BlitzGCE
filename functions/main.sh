@@ -27,6 +27,7 @@ variablepull () {
 
   #account=$(cat /var/plexguide/project.account)
   account=$(gcloud config configurations list | tail -n 1 | awk '{print $3}')
+  if [[ "$account" == "" ]]; then account=NOT-SET; fi
 
   ipaddress=$(cat /var/plexguide/project.ipaddress)
   ipregion=$(cat /var/plexguide/project.ipregion)
