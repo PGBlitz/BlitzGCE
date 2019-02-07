@@ -57,6 +57,7 @@ case $typed in
         echo ""
         gcloud auth login --no-launch-browser --verbosity error --quiet
         echo "NOT-SET" > /var/plexguide/project.id
+        echo "TEST / TEST"
         ### note --no-user-output-enabled | gcloud auth login --enable-gdrive-access --brief
         # gcloud config configurations list
         gcestart ;;
