@@ -38,6 +38,7 @@ variablepull () {
 
   #projectid=projectid
   projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
+  if [[ "$projectid" != "" ]]; then echo $projectid > /var/plexguide/project.id; fi
 
   serverstatus=serverstatus
   sshstatus=notready
