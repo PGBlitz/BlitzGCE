@@ -7,6 +7,27 @@
 ################################################################################
 source /opt/pggce/functions/main.sh
 
+billingdeny () {
+if [[ $(gcloud beta billing accounts list | grep "\<True\>") == "" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 MESSAGE TYPE: ERROR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REASON: Billing Failed
+
+INSTRUCTIONS: Must turn on the billing for first for this project in
+GCE Panel. Exiting!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Error | Press [ENTER] ' typed < /dev/tty
+projectinterface
+fi
+
+}
+
 deployfail () {
 
 gcefail="off"
@@ -140,6 +161,9 @@ EOF
 
         typed=$(cat /var/plexguide/prolist/$typed2)
         gcloud config set project $typed
+        billingdeny
+
+        echo "off" > /var/plexguide/project.switch
 
 tee <<-EOF
 
@@ -299,6 +323,27 @@ that exists!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+
+projectdeny () {
+if [[ $(cat /var/plexguide/project.id) == "NOT-SET" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 MESSAGE TYPE: ERROR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REASON: Project ID Not Set
+
+INSTRUCTIONS: Project ID from the Project Interface must be set first.
+Exiting!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Error | Press [ENTER] ' typed < /dev/tty
+gcestart
+fi
+
+}
 
 ### go back to main project interface
 projectinterface
