@@ -23,6 +23,7 @@ variablepull () {
   variable /var/plexguide/project.processor NOT-SET
   variable /var/plexguide/project.nvme NOT-SET
   variable /var/plexguide/project.id NOT-SET
+  variable /var/plexguide/project.switch off
 
   ### variables being called
 
@@ -36,9 +37,12 @@ variablepull () {
   nvmecount=$(cat /var/plexguide/project.nvme)
   processor=$(cat /var/plexguide/project.processor)
 
-  #projectid=projectid
-  projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
-  if [[ "$projectid" != "" ]]; then echo $projectid > /var/plexguide/project.id; fi
+  # if user switches usernames, this turns on. turns of when user sets project again
+  switchcheck=(cat /var/plexguide/project.switch)
+  if [[ "switchcheck" != "on "]]; then
+    projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
+    if [[ "$projectid" != "" ]]; then echo $projectid > /var/plexguide/project.id; fi
+  fi
 
   serverstatus=serverstatus
   sshstatus=notready
