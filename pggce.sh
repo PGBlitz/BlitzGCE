@@ -19,7 +19,13 @@ gcestart () {
 
   ### For New Installs; hangs because of no account logged in yet; this prevents
   othercheck=$(cat /var/plexguide/project.account)
-  if [[ "$othercheck" != "NOT-SET" ]]; then servercheck
+  secondcheck=$(cat /var/plexguide/project.id )
+  if [[ "$othercheck" != "NOT-SET" ]]; then
+
+    if [[ "$secondcheck" != "NOT-SET" ]]; then servercheck
+    else
+    projectid=NOT-SET
+    gcedeployedcheck=NOT-SET; fi
 else
   account=NOT-SET
   projectid=NOT-SET

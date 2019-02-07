@@ -22,6 +22,7 @@ variablepull () {
   variable /var/plexguide/project.ipzone NOT-SET
   variable /var/plexguide/project.processor NOT-SET
   variable /var/plexguide/project.nvme NOT-SET
+  variable /var/plexguide/project.id NOT-SET
 
   ### variables being called
 
