@@ -24,11 +24,9 @@ variablepull () {
   variable /var/plexguide/project.nvme NOT-SET
 
   ### variables being called
-  account=""
-  projectid=""
+
   #account=$(cat /var/plexguide/project.account)
-  #account=$(gcloud config configurations list | tail -n 1 | awk '{print $3}')
-  if [[ "$account" == "" ]]; then account=NOT-SET; fi
+  account=$(gcloud config configurations list | tail -n 1 | awk '{print $3}')
 
   ipaddress=$(cat /var/plexguide/project.ipaddress)
   ipregion=$(cat /var/plexguide/project.ipregion)
@@ -37,8 +35,7 @@ variablepull () {
   processor=$(cat /var/plexguide/project.processor)
 
   #projectid=projectid
-  #projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
-  if [[ "$projectid" == "" ]]; then projectid=NOT-SET; fi
+  projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
 
   serverstatus=serverstatus
   sshstatus=notready

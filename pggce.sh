@@ -16,7 +16,13 @@ gcestart () {
 
   ### call key variables ~ /functions/main.sh
   variablepull
-  servercheck
+
+  ### For New Installs; hangs because of no account logged in yet; this prevents
+  othercheck=$(cat /var/plexguide/project.ipaddress)
+  if [[ "$othercheck" != "NOT-SET" ]]; then servercheck
+else
+  account=NOT-SET
+  projectid=NOT-SET; fi
 
 tee <<-EOF
 
