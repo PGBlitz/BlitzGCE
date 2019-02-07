@@ -39,7 +39,7 @@ variablepull () {
 
   # if user switches usernames, this turns on. turns of when user sets project again
   switchcheck=(cat /var/plexguide/project.switch)
-  if [[ "$switchcheck" != "on"]]; then
+  if [[ "$switchcheck" != "on" ]]; then
     projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
     if [[ "$projectid" != "" ]]; then echo $projectid > /var/plexguide/project.id; fi
   fi
