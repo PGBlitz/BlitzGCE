@@ -8,6 +8,7 @@
 source /opt/pggce/functions/main.sh
 
 deployserver () {
+  variablepull
   ### checks to make sure common variables are filled out
 deployfail
   ### prevents deployment if one exists!
@@ -28,20 +29,18 @@ EOF
 gcestart; fi
 
 ### deletes deployed ip if it exists for some odd reason
-  ipcheck=$(gcloud compute instances list | grep pg-gce | head -n +1 | awk '{print $2}' | grep ".")
-  if [[ "$ipcheck" != "" ]]; then
-tee <<-EOF
+#  ipcheck=$(gcloud compute instances list | grep pg-gce | head -n +1 | awk '{print $2}' | grep ".")
+#  if [[ "$ipcheck" != "" ]]; then
+#tee <<-EOF
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Deleting Old IP Address
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#🚀 Deleting Old IP Address
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-EOF
-
-variablepull
-gcloud compute addresses delete pg-gce --region $ipregion --quiet
-echo
-fi
+#EOF
+#gcloud compute addresses delete pg-gce --region $ipregion --quiet
+#echo
+#fi
 
   ### builds plexguide firewall if it does not exist
   rulecheck=$(gcloud compute firewall-rules list | grep plexguide)
