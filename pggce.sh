@@ -59,7 +59,7 @@ case $typed in
         deployserver
         gcestart ;;
     6 )
-        if [[ "$gcedeployedcheck" == "Deployed" ]]; then
+        if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
           sshdeploy
         else
           gcestart
