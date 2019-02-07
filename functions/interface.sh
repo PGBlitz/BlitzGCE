@@ -308,4 +308,5 @@ sshdeploy ()
 {
   variablepull
   gcloud compute ssh pg-gce --zone "$ipzone"
+  gcestart
 }
