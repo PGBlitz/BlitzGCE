@@ -65,13 +65,16 @@ if [[ $(cat /var/plexguide/project.id) == "NOT-SET" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Project ID Not Set!
+🌎  WARNING TYPE: ERROR
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-INSTRUCTIONS: Project ID from the Project Interface must be set first!
+REASON: Project ID Not Set
+
+INSTRUCTIONS: Project ID from the Project Interface must be set first
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowledge Being a BoneHead | Press [ENTER] ' typed < /dev/tty
+read -p '↘️  Acknowledge Error | Press [ENTER] ' typed < /dev/tty
 
 fi
 
