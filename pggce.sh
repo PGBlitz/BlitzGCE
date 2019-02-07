@@ -65,24 +65,30 @@ case $typed in
         projectinterface
         gcestart ;;
     3 )
+        projectdeny
         processorcount
         gcestart ;;
     4 )
+        projectdeny
         regioncenter
         gcestart ;;
     5 )
+        projectdeny
         deployserver
         gcestart ;;
     6 )
+        projectdeny
         if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
           sshdeploy
         else
           gcestart
         fi ;;
     A )
+        projectdeny
         destroyserver
         gcestart ;;
     a )
+        projectdeny
         destroyserver
         gcestart ;;
     z )
@@ -90,7 +96,7 @@ case $typed in
     Z )
         exit ;;
     * )
-        question1 ;;
+        gcestart ;;
 esac
 }
 
