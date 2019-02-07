@@ -45,7 +45,13 @@ variablepull () {
 }
 
 servercheck () {
-  temp55=$(gcloud compute instances list | grep pg-gce)
-  if [[ "$temp55" != "" ]]; then gcedeployedcheck="DEPLOYED";
-else gcedeployedcheck="NOT DEPLOYED"; fi
+
+  gcedeployedcheck="NOT DEPLOYED"
+  minicheck=$(cat /var/plexguide/project.id)
+  if [[ "$minicheck" != "NOT-SET" ]]; then
+
+    temp55=$(gcloud compute instances list | grep pg-gce)
+    if [[ "$temp55" != "" ]]; then gcedeployedcheck="DEPLOYED"; fi
+
+  fi
 }
