@@ -228,8 +228,9 @@ EOF
 🌎  Project Message
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-INFO: $projectfinal created! Ensure to set it as your default for an
-existing intnerface afterwards!
+INFO: $projectfinal created. Ensure afterwards to ESTABLISH the project
+as your default to utilize!
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
@@ -242,7 +243,7 @@ existlist () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Delete Existing Projects         
+🌎  Delete Existing Projects
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WARNING : Deleting projects will result in deleting keys that are
