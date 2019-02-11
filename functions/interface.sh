@@ -177,7 +177,8 @@ EOF
         gcloud beta billing projects link $typed --billing-account "$accountbilling" --quiet
 
         echo ""
-        echo 1
+        echo "Please Standby! This can take a minute if this is a new project!"
+        echo ""
         gcloud services enable compute.googleapis.com
 
 tee <<-EOF
