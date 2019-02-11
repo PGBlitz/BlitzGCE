@@ -23,6 +23,7 @@ GCE Panel. Exiting!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Acknowledge Error | Press [ENTER] ' typed < /dev/tty
+
 projectinterface
 fi
 
@@ -171,6 +172,9 @@ tee <<-EOF
 🌎 System Message: Enabling Compute ~ Project $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+        accountbilling=$(gcloud beta billing accounts list | tail -1 | awk '{print $1}')
+        gcloud beta billing projects link $typed --billing-account "$accountbilling"
+
         echo ""
         gcloud services enable compute.googleapis.com
 
