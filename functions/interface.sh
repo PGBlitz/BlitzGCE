@@ -225,7 +225,7 @@ EOF
         tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Project Message                       ⚡ Reference: pggce.plexguide.com
+🌎  Project Message
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 INFO: $projectfinal created! Ensure to set it as your default for an
@@ -233,7 +233,7 @@ existing intnerface afterwards!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p 'Type y or n | Press [ENTER]: ' typed < /dev/tty
+read -p 'Acknowledge Info | Press [ENTER]' typed < /dev/tty
 
 projectinterface ;;
 
@@ -242,7 +242,7 @@ existlist () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  Delete Existing Projects              ⚡ Reference: pggce.plexguide.com
+🌎  Delete Existing Projects         
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WARNING : Deleting projects will result in deleting keys that are
