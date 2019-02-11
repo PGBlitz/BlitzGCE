@@ -169,22 +169,26 @@ EOF
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 System Message: Enabling Compute ~ Project $typed
+🌎 PLEASE WAIT! Enabling Billing ~ Project $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
         accountbilling=$(gcloud beta billing accounts list | tail -1 | awk '{print $1}')
         gcloud beta billing projects link $typed --billing-account "$accountbilling" --quiet
 
-        echo ""
-        echo "Please Standby! This can take a minute if this is a new project!"
-        echo ""
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 PLEASE WAIT! Enabling Compute API ~ Project $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
         gcloud services enable compute.googleapis.com
 
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 System Message: Enabling Drive API ~ Project $typed
+🌎 PLEASE WAIT! Enabling Drive API ~ Project $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
         echo ""
