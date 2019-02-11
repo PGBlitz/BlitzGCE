@@ -174,9 +174,10 @@ tee <<-EOF
 
 EOF
         accountbilling=$(gcloud beta billing accounts list | tail -1 | awk '{print $1}')
-        gcloud beta billing projects link $typed --billing-account "$accountbilling"
+        gcloud beta billing projects link $typed --billing-account "$accountbilling" --quiet
 
         echo ""
+        echo 1
         gcloud services enable compute.googleapis.com
 
 tee <<-EOF
