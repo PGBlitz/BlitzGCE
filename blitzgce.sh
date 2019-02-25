@@ -5,11 +5,11 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/pggce/functions/main.sh
-source /opt/pggce/functions/interface.sh
-source /opt/pggce/functions/ip.sh
-source /opt/pggce/functions/deploy.sh
-source /opt/pggce/functions/destroy.sh
+source /opt/blitzgce/functions/main.sh
+source /opt/blitzgce/functions/interface.sh
+source /opt/blitzgce/functions/ip.sh
+source /opt/blitzgce/functions/deploy.sh
+source /opt/blitzgce/functions/destroy.sh
 
 ### the primary interface for GCE
 gcestart () {

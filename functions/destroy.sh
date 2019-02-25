@@ -5,7 +5,7 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/pggce/functions/main.sh
+source /opt/blitzgce/functions/main.sh
 
 destroyserver () {
 
