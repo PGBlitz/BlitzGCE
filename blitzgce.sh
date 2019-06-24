@@ -40,10 +40,11 @@ tee <<-EOF
 1. Log Into the Account  : $account
 2. Project Interface     : $projectid
 3. Processor Count       : $processor
-4. NVME Count            : $nvmecount
-5. Set IP Region / Server: $ipaddress [$ipregion]
-6. Deploy GCE Server     : $gcedeployedcheck
-7. SSH into the GCE Box
+4. Ram Count             : $ramcount
+5. NVME Count            : $nvmecount
+6. Set IP Region / Server: $ipaddress [$ipregion]
+7. Deploy GCE Server     : $gcedeployedcheck
+8. SSH into the GCE Box
 
 a. Destroy Server
 z. EXIT
@@ -69,20 +70,24 @@ case $typed in
         projectdeny
         processorcount
         gcestart ;;
+        
     4 )
+        projectdeny
+        ramcount
+        gcestart ;;
+    5 )
         projectdeny
         nvmecount
         gcestart ;;
-  
-    5 )
+    6 )
         projectdeny
         regioncenter
         gcestart ;;
-    6 )
+    7 )
         projectdeny
         deployserver
         gcestart ;;
-    7 )
+    8 )
         projectdeny
         if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
           sshdeploy
