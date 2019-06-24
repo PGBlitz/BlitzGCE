@@ -80,6 +80,26 @@ if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]
   echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
 }
 
+ramcount () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  RAM Count
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Most users will only need to utilize 8 Gb Ram . The more, the
+faster the processing, but the faster your credits drain. If intent is to
+be in beast mode during the GCE's duration, 16GB is acceptable.
+
+INSTRUCTIONS: Set the RAM Count ~ 8 / 12 / 16 GB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+
+if [[ "$typed" == "8" || "$typed" == "12" || "$typed" == "16" ]]; then
+  echo "$typed" > /var/plexguide/project.ram; else ramcount; fi
+}
+
 processorcount () {
 tee <<-EOF
 
