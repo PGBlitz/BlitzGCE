@@ -108,10 +108,10 @@ tee <<-EOF
 EOF
   variablepull
   echo
-  gcloud compute instances delete-access-config pg-gce --access-config-name "external-nat" --zone $ipzone --quiet
+  gcloud compute instances delete-access-config pg-gce-dev --access-config-name "external-nat" --zone $ipzone --quiet
 
   echo
-  gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --zone $ipzone --address $ipaddress
+  gcloud compute instances add-access-config pg-gce-dev --access-config-name "external-nat" --zone $ipzone --address $ipaddress
   echo
   read -p '↘️  Process Complete | Press [ENTER] ' typed < /dev/tty
 
