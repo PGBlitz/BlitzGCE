@@ -10,7 +10,7 @@ source /opt/blitzgce/functions/main.sh
 destroyserver () {
 
   ### checking to making sure there is a server deployed to destroy
-  destorycheck=$(gcloud compute instances list | grep pg-gce-dev | head -n +1 | awk '{print $1}')
+  destorycheck=$(gcloud compute instances list | grep pg-gce | head -n +1 | awk '{print $1}')
   if [[ "$destorycheck" == "" ]]; then
 
 tee <<-EOF
@@ -48,7 +48,7 @@ EOF
   rm -rf /var/plexguide/project.zone
   rm -rf /var/plexguide/project.ipregion
   rm -rf /var/plexguide/project.ipaddress
-  gcloud compute addresses delete pg-gce-dev --region $ipregion --quiet
+  gcloud compute addresses delete pg-gce --region $ipregion --quiet
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
 tee <<-EOF
