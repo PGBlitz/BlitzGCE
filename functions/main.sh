@@ -36,7 +36,8 @@ variablepull () {
   ipzone=$(cat /var/plexguide/project.ipzone)
   nvmecount=$(cat /var/plexguide/project.nvme)
   processor=$(cat /var/plexguide/project.processor)
-
+  ramcount==$(cat /var/plexguide/project.ram)
+  
   # if user switches usernames, this turns on. turns of when user sets project again
   switchcheck=$(cat /var/plexguide/project.switch)
   if [[ "$switchcheck" != "on" ]]; then
