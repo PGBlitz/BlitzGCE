@@ -48,7 +48,7 @@ EOF
   rm -rf /var/plexguide/project.zone
   rm -rf /var/plexguide/project.ipregion
   rm -rf /var/plexguide/project.ipaddress
-  gcloud compute addresses delete pg-gce --region $ipregion --quiet
+  gcloud compute addresses delete pg-gce-dev --region $ipregion --quiet
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
 tee <<-EOF
