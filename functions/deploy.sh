@@ -82,7 +82,7 @@ fi
 
   ### Deploy the GCE Server
   echo
-  gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipzone
+  gcloud compute instances create pg-gce-dev --source-instance-template pg-gce-blueprint --zone $ipzone
 
   ### Assigning the IP Address to GCE Box
 tee <<-EOF
