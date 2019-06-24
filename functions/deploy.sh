@@ -77,13 +77,13 @@ fi
 nvme=$"(cat /var/plexguide/project.nvme)"
 nvmedeploy=$(cat /var/plexguide/deploy.nvme )
 
-if [ "$nvme" -eq "1"]; then  
+if [ "$nvme" == "1" ]; then
   echo "--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
-elif [ "$nvme" -eq "2"]; then
+elif [ "$nvme" == "2" ]; then
  echo "--local-ssd interface=nvme \ --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
-elif [ "$nvme" -eq "3"]; then
+elif [ "$nvme" == "3" ]; then
  echo "--local-ssd interface=nvme \ --local-ssd interface=nvme \ --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
-elif [ "$nvme" -eq "4"]; then
+elif [ "$nvme" ==  "4" ]; then
  echo "--local-ssd interface=nvme \ --local-ssd interface=nvme \ --local-ssd interface=nvme \ --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
 fi
 ### NVME counter to add dont edit this lines above
