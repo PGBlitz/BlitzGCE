@@ -49,9 +49,9 @@ gcloud compute zones list | grep $typed | head -n1 | awk '{print $2}' > /var/ple
 
 echo
 variablepull
-gcloud compute addresses create pg-gce-dev --region $ipregion --project $projectid
+gcloud compute addresses create pg-gce --region $ipregion --project $projectid
 gcloud compute zones list | grep $typed | head -n1 | awk '{print $1}' > /var/plexguide/project.ipzone
-gcloud compute addresses list | grep pg-gce-dev | awk '{print $2}' > /var/plexguide/project.ipaddress
+gcloud compute addresses list | grep pg-gce | awk '{print $2}' > /var/plexguide/project.ipaddress
 
 echo
 read -p '↘️  IP Address & Region Set | Press [ENTER] ' typed < /dev/tty
