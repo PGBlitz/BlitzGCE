@@ -97,7 +97,7 @@ EOF
 read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "8" || "$typed" == "12" || "$typed" == "16" ]]; then
-  echo "$typed" > /var/plexguide/project.ram; else ramcount; fi
+  echo "$typed"GB > /var/plexguide/project.ram; else ramcount; fi
 }
 
 processorcount () {
