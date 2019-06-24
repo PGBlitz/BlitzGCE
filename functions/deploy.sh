@@ -74,17 +74,17 @@ fi
   variablepull
 
 ## NVME counter to add dont edit this lines below
-nvme=$"(cat /var/plexguide/project.nvme)"
-nvmedeploy=$(cat /var/plexguide/deploy.nvme )
+nvme="$(cat /var/plexguide/project.nvme)"
+nvmedeploy="$(cat /var/plexguide/deploy.nvme )"
 
 if [ "$nvme" == "1" ]; then
-  echo "--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
+  echo -e "--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
 elif [ "$nvme" == "2" ]; then
- echo "--local-ssd interface=nvme \ --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+ echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
 elif [ "$nvme" == "3" ]; then
- echo "--local-ssd interface=nvme \ --local-ssd interface=nvme \ --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+ echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
 elif [ "$nvme" ==  "4" ]; then
- echo "--local-ssd interface=nvme \ --local-ssd interface=nvme \ --local-ssd interface=nvme \ --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+ echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
 fi
 ### NVME counter to add dont edit this lines above
 
