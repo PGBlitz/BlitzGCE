@@ -75,7 +75,7 @@ fi
 
   ### Deploys the PG Template
   gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory 8GB \
+  --custom-cpu $processor --custom-nvme $nvmecount --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
   --boot-disk-auto-delete --boot-disk-size 200GB \
   --local-ssd interface=nvme
