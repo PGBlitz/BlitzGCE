@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/blitzgce/functions/main.sh
-
+suffix=GB
 billingdeny () {
 if [[ $(gcloud beta billing accounts list | grep "\<True\>") == "" ]]; then
 tee <<-EOF
@@ -97,7 +97,7 @@ EOF
 read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "8" || "$typed" == "12" || "$typed" == "16" ]]; then
-  echo "$typed"GB > /var/plexguide/project.ram; else ramcount; fi
+  echo "$typed""$suffix"> /var/plexguide/project.ram; else ramcount; fi
 }
 
 processorcount () {
