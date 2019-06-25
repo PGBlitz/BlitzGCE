@@ -89,13 +89,13 @@ if [[ "$typed" == "1" ]] ; then
   echo -e "--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
 elif [[ "$typed" == "2" ]] ; then
  echo "$typed" > /var/plexguide/project.nvme
- echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+ echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
 elif [[ "$typed" == "3" ]] ; then
 echo "$typed" > /var/plexguide/project.nvme
- echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+ echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
 elif [[ "$typed" == "4" ]] ; then
  echo "$typed" > /var/plexguide/project.nvme
- echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme; else nvmecount; fi
+ echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" > /var/plexguide/deploy.nvme; else nvmecount; fi
 }
 ramcount () {
 tee <<-EOF
