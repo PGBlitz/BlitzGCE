@@ -15,14 +15,11 @@ deployfail
 servercheck
   if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 ERROR: PG GCE Instance Already Detected
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 INFORMATION: The prior GCE Server must be deleted prior to deloying a
 another one! Exiting!
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
@@ -49,7 +46,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Creating Firewall Rules | Does Not Exist
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
 
 gcloud compute firewall-rules create plexguide --allow all
@@ -60,96 +56,44 @@ fi
   blueprint=$(gcloud compute instance-templates list | grep pg-gce-blueprint)
   if [ "$blueprint" != "" ]; then
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Deleting Old PG Template
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
 gcloud compute instance-templates delete pg-gce-blueprint --quiet
 echo
 fi
   ### Recalls Variables
- # variablepull
-  
+  variablepull
+
 ## NVME counter to add dont edit this lines below
-  nvme="$(cat /var/plexguide/project.nvme)"
-    
-if [ "$nvme" == "1" ] ; then
- echo "Deploys the PG Template with 1 NVME"
- 
-  variablepull
-  
-  gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory $ramcount \
-  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
-  --boot-disk-auto-delete --boot-disk-size 200GB \
-  --local-ssd interface=nvme
+nvme="$(cat /var/plexguide/project.nvme)"
+nvmedeploy="$(cat /var/plexguide/deploy.nvme)"
 
-elif [ "$nvme" == "2" ] ; then
- echo "Deploys the PG Template with 2 NVMEs"
- 
-   variablepull
-   
-  gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory $ramcount \
-  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
-  --boot-disk-auto-delete --boot-disk-size 200GB \
-  --local-ssd interface=nvme \ 
-  --local-ssd interface=nvme
-
-elif [ "$nvme" == "3" ] ; then 
-
-echo "Deploys the PG Template with 3 NVMEs"
-  variablepull
-  
-  gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory $ramcount \
-  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
-  --boot-disk-auto-delete --boot-disk-size 200GB \
-  --local-ssd interface=nvme \ 
-  --local-ssd interface=nvme \ 
-  --local-ssd interface=nvme
- 
- elif [ "$nvme" ==  "4" ] ; then
-   echo "Deploys the PG Template with 4 NVMEs"
-   echo "Beastmode On"
-   variablepull
-   
-  gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory $ramcount \
-  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
-  --boot-disk-auto-delete --boot-disk-size 200GB \
-  --local-ssd interface=nvme \ 
-  --local-ssd interface=nvme \
-  --local-ssd interface=nvme \ 
-  --local-ssd interface=nvme
-  
-else [ "$nvme" == "NOT-SET" ] ; then
-  echo "Deploys the PG Template with 1 NVMEs"
-  variablepull
-  gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory $ramcount \
-  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
-  --boot-disk-auto-delete --boot-disk-size 200GB \
-  --local-ssd interface=nvme
- fi
-
+if [[ "$nvme" == "1" ]] ; then
+  echo -e " --local-ssd interface=nvme" > /var/plexguide/deploy.nvme
+elif [[ "$nvme" == "2" ]] ; then
+ echo -e " --local-ssd interface=nvme \ \n --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+elif [[ "$nvme" == "3" ]] ; then
+ echo -e " --local-ssd interface=nvme \ \n --local-ssd interface=nvme \ \n --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+elif [[ "$nvme" == "4" ]] ; then
+ echo -e " --local-ssd interface=nvme \ \n --local-ssd interface=nvme \ \n --local-ssd interface=nvme \ \n --local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+fi
 ### NVME counter to add dont edit this lines above
 
- # ### Deploys the PG Template
-  #gcloud compute instance-templates create pg-gce-blueprint \
- # --custom-cpu $processor --custom-memory $ramcount \
- # --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
- # --boot-disk-auto-delete --boot-disk-size 200GB \
+  ### Deploys the PG Template
+  gcloud compute instance-templates create pg-gce-blueprint \
+  --custom-cpu $processor --custom-memory $ramcount \
+  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
+  --boot-disk-auto-delete --boot-disk-size 200GB \
+  $nvmedeploy
 
   ### Deploy the GCE Server
-
+  echo
   gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipzone
 
   ### Assigning the IP Address to GCE Box
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Finalizing - Assigned IP Address to Instance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
