@@ -70,13 +70,16 @@ gcloud compute instance-templates delete pg-gce-blueprint --quiet
 echo
 fi
   ### Recalls Variables
-  variablepull
+ # variablepull
   
 ## NVME counter to add dont edit this lines below
   nvme="$(cat /var/plexguide/project.nvme)"
     
 if [ "$nvme" == "1" ] ; then
  echo "Deploys the PG Template with 1 NVME"
+ 
+  variablepull
+  
   gcloud compute instance-templates create pg-gce-blueprint \
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
@@ -85,6 +88,9 @@ if [ "$nvme" == "1" ] ; then
 
 elif [ "$nvme" == "2" ] ; then
  echo "Deploys the PG Template with 2 NVMEs"
+ 
+   variablepull
+   
   gcloud compute instance-templates create pg-gce-blueprint \
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
@@ -92,8 +98,11 @@ elif [ "$nvme" == "2" ] ; then
   --local-ssd interface=nvme \ 
   --local-ssd interface=nvme
 
-elif [ "$nvme" == "3" ] ; then
- echo "Deploys the PG Template with 3 NVME"
+elif [ "$nvme" == "3" ] ; then 
+
+echo "Deploys the PG Template with 3 NVMEs"
+  variablepull
+  
   gcloud compute instance-templates create pg-gce-blueprint \
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
@@ -103,7 +112,10 @@ elif [ "$nvme" == "3" ] ; then
   --local-ssd interface=nvme
  
  elif [ "$nvme" ==  "4" ] ; then
-   echo "Deploys the PG Template with 4 NVME"
+   echo "Deploys the PG Template with 4 NVMEs"
+   echo "Beastmode On"
+   variablepull
+   
   gcloud compute instance-templates create pg-gce-blueprint \
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
@@ -114,7 +126,8 @@ elif [ "$nvme" == "3" ] ; then
   --local-ssd interface=nvme
   
 else [ "$nvme" == "NOT-SET" ] ; then
-  echo "Deploys the PG Template with 1 NVME"
+  echo "Deploys the PG Template with 1 NVMEs"
+  variablepull
   gcloud compute instance-templates create pg-gce-blueprint \
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
