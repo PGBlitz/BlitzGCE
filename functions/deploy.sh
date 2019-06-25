@@ -73,27 +73,12 @@ fi
   ### Recalls Variables
   variablepull
 
-## NVME counter to add dont edit this lines below
-nvme="$(cat /var/plexguide/project.nvme)"
-nvmedeploy="$(cat /var/plexguide/deploy.nvme )"
-
-if [ "$nvme" == "1" ]; then
-  echo -e "--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
-elif [ "$nvme" == "2" ]; then
- echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
-elif [ "$nvme" == "3" ]; then
- echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
-elif [ "$nvme" ==  "4" ]; then
- echo -e "--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme \ \n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
-fi
-### NVME counter to add dont edit this lines above
-
   ### Deploys the PG Template
   gcloud compute instance-templates create pg-gce-blueprint \
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
   --boot-disk-auto-delete --boot-disk-size 200GB \
-  $nvmedeploy
+  --local-ssd interface=nvme
 
   ### Deploy the GCE Server
   echo
