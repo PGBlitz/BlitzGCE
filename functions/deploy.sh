@@ -95,7 +95,8 @@ fi
   --custom-cpu $processor --custom-memory $ramcount \
   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
   --boot-disk-auto-delete --boot-disk-size 200GB \
-  $nvmedeploy
+  --local-ssd interface=nvme \
+  --local-ssd interface=nvme 
 
   ### Deploy the GCE Server
   echo
