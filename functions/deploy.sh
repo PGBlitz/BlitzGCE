@@ -99,3 +99,5 @@ EOF
   gcloud compute instances add-access-config pg-gce --access-config-name "external-nat" --zone $ipzone --address $ipaddress
   echo
   read -p '↘️  Process Complete | Press [ENTER] ' typed < /dev/tty
+
+}
