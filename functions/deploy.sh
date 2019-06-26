@@ -15,14 +15,11 @@ deployfail
 servercheck
   if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 ERROR: PG GCE Instance Already Detected
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 INFORMATION: The prior GCE Server must be deleted prior to deloying a
 another one! Exiting!
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
@@ -49,7 +46,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Creating Firewall Rules | Does Not Exist
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
 
 gcloud compute firewall-rules create plexguide --allow all
@@ -60,33 +56,35 @@ fi
   blueprint=$(gcloud compute instance-templates list | grep pg-gce-blueprint)
   if [ "$blueprint" != "" ]; then
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Deleting Old PG Template
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
 gcloud compute instance-templates delete pg-gce-blueprint --quiet
 echo
 fi
-
   ### Recalls Variables
-  variablepull
+variablepull
 
-  ### Deploys the PG Template
+### Deploys the PG Template
   gcloud compute instance-templates create pg-gce-blueprint \
-  --custom-cpu $processor --custom-memory 8GB \
-  --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
-  --boot-disk-auto-delete --boot-disk-size 200GB \
-  --local-ssd interface=nvme
+   --custom-cpu $processor --custom-memory $ramcount \
+   --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
+   --boot-disk-auto-delete --boot-disk-size 200GB \
+   $(tail /var/plexguide/deploy.nvme)
 
-  ### Deploy the GCE Server
+ # ### Deploys the PG Template
+  #gcloud compute instance-templates create pg-gce-blueprint \
+ # --custom-cpu $processor --custom-memory $ramcount \
+ # --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
+ # --boot-disk-auto-delete --boot-disk-size 200GB \
+
+   ### Deploy the GCE Server
   echo
   gcloud compute instances create pg-gce --source-instance-template pg-gce-blueprint --zone $ipzone
 
   ### Assigning the IP Address to GCE Box
 tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Finalizing - Assigned IP Address to Instance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

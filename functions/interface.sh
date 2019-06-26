@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/blitzgce/functions/main.sh
-
+suffix=GB
 billingdeny () {
 if [[ $(gcloud beta billing accounts list | grep "\<True\>") == "" ]]; then
 tee <<-EOF
@@ -36,8 +36,9 @@ gcefail="off"
 fail1=$(cat /var/plexguide/project.ipregion)
 fail2=$(cat /var/plexguide/project.processor)
 fail3=$(cat /var/plexguide/project.account)
+fail4=$(cat /var/plexguide/project.nvme)
 
-if [[ "$fail1" == "NOT-SET" || "$fail2" == "NOT-SET" || "$fail3" == "NOT-SET" ]]; then
+if [[ "$fail1" == "NOT-SET" || "$fail2" == "NOT-SET" || "$fail3" == "NOT-SET" || "$fail4" == "NOT-SET" ]]; then
   gcefail="on"; fi
 
 if [[ "$gcefail" == "on" ]]; then
@@ -75,8 +76,45 @@ INSTRUCTIONS: Set the NVME Count ~ 1/2/3/4
 EOF
 read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
 
-if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]]; then
-  echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
+##if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]]
+
+##; then
+ ## echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
+  
+## NVME counter to add dont edit this lines below
+nvmedeploy="$(cat /var/plexguide/deploy.nvme)"
+
+if [[ "$typed" == "1" ]] ; then
+  echo "$typed" > /var/plexguide/project.nvme
+  echo -e "--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
+elif [[ "$typed" == "2" ]] ; then
+ echo "$typed" > /var/plexguide/project.nvme
+ echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme " > /var/plexguide/deploy.nvme
+elif [[ "$typed" == "3" ]] ; then
+echo "$typed" > /var/plexguide/project.nvme
+ echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" > /var/plexguide/deploy.nvme
+elif [[ "$typed" == "4" ]] ; then
+ echo "$typed" > /var/plexguide/project.nvme
+ echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" > /var/plexguide/deploy.nvme; else nvmecount; fi
+}
+ramcount () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  RAM Count
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Most users will only need to utilize 8 Gb Ram . The more, the
+faster the processing, but the faster your credits drain. If intent is to
+be in beast mode during the GCE's duration, 16GB is acceptable.
+
+INSTRUCTIONS: Set the RAM Count ~ 8 / 12 / 16 GB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+
+if [[ "$typed" == "8" || "$typed" == "12" || "$typed" == "16" ]]; then
+  echo "$typed""$suffix"> /var/plexguide/project.ram; else ramcount; fi
 }
 
 processorcount () {
@@ -316,7 +354,8 @@ EOF
     Z )
         gcestart ;;
     * )
-        processorcount ;;
+        processorcount
+        nvmecount ;;
 esac
 
 }
