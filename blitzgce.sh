@@ -47,7 +47,7 @@ tee <<-EOF
 8. SSH into the GCE Box
 
 a. Destroy Server
-z. EXIT
+z. Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
