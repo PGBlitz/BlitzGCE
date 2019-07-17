@@ -12,26 +12,29 @@ source /opt/blitzgce/functions/deploy.sh
 source /opt/blitzgce/functions/destroy.sh
 
 ### the primary interface for GCE
-gcestart () {
+gcestart() {
 
-  ### call key variables ~ /functions/main.sh
-  variablepull
+    ### call key variables ~ /functions/main.sh
+    variablepull
 
-  ### For New Installs; hangs because of no account logged in yet; this prevents
-  othercheck=$(cat /var/plexguide/project.account)
-  secondcheck=$(cat /var/plexguide/project.id )
-  if [[ "$othercheck" != "NOT-SET" ]]; then
+    ### For New Installs; hangs because of no account logged in yet; this prevents
+    othercheck=$(cat /var/plexguide/project.account)
+    secondcheck=$(cat /var/plexguide/project.id)
+    if [[ "$othercheck" != "NOT-SET" ]]; then
 
-    if [[ "$secondcheck" != "NOT-SET" ]]; then servercheck
+        if [[ "$secondcheck" != "NOT-SET" ]]; then
+            servercheck
+        else
+            projectid=NOT-SET
+            gcedeployedcheck=NOT-SET
+        fi
     else
-    projectid=NOT-SET
-    gcedeployedcheck=NOT-SET; fi
-else
-  account=NOT-SET
-  projectid=NOT-SET
-  gcedeployedcheck=NOT-SET; fi
+        account=NOT-SET
+        projectid=NOT-SET
+        gcedeployedcheck=NOT-SET
+    fi
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎  PG GCE Deployment ~ http://pggce.pgblitz.com
@@ -52,63 +55,76 @@ z. Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p 'Type Number | Press [ENTER]: ' typed < /dev/tty
+    read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
-case $typed in
-    1 )
+    case $typed in
+    1)
         echo ""
         gcloud auth login --no-launch-browser --verbosity error --quiet
-        echo "NOT-SET" > /var/plexguide/project.id
-        echo "on" > /var/plexguide/project.switch
+        echo "NOT-SET" >/var/plexguide/project.id
+        echo "on" >/var/plexguide/project.switch
         ### note --no-user-output-enabled | gcloud auth login --enable-gdrive-access --brief
         # gcloud config configurations list
-        gcestart ;;
-    2 )
+        gcestart
+        ;;
+    2)
         projectinterface
-        gcestart ;;
-    3 )
+        gcestart
+        ;;
+    3)
         projectdeny
         processorcount
-        gcestart ;;
-        
-    4 )
+        gcestart
+        ;;
+
+    4)
         projectdeny
         ramcount
-        gcestart ;;
-    5 )
+        gcestart
+        ;;
+    5)
         projectdeny
         nvmecount
-        gcestart ;;
-    6 )
+        gcestart
+        ;;
+    6)
         projectdeny
         regioncenter
-        gcestart ;;
-    7 )
+        gcestart
+        ;;
+    7)
         projectdeny
         deployserver
-        gcestart ;;
-    8 )
+        gcestart
+        ;;
+    8)
         projectdeny
         if [[ "$gcedeployedcheck" == "DEPLOYED" ]]; then
-          sshdeploy
+            sshdeploy
         else
-          gcestart
-        fi ;;
-    A )
+            gcestart
+        fi
+        ;;
+    A)
         projectdeny
         destroyserver
-        gcestart ;;
-    a )
+        gcestart
+        ;;
+    a)
         projectdeny
         destroyserver
-        gcestart ;;
-    z )
-        exit ;;
-    Z )
-        exit ;;
-    * )
-        gcestart ;;
-esac
+        gcestart
+        ;;
+    z)
+        exit
+        ;;
+    Z)
+        exit
+        ;;
+    *)
+        gcestart
+        ;;
+    esac
 }
 
 gcestart

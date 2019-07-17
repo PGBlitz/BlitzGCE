@@ -7,21 +7,21 @@
 ################################################################################
 source /opt/blitzgce/functions/main.sh
 
-destroyserver () {
+destroyserver() {
 
   ### checking to making sure there is a server deployed to destroy
   destorycheck=$(gcloud compute instances list | grep pg-gce | head -n +1 | awk '{print $1}')
   if [[ "$destorycheck" == "" ]]; then
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: No PG-GCE Server Deployed! Exiting!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-  gcestart
+    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+    gcestart
   fi
 
   ### starting process
@@ -30,7 +30,7 @@ EOF
   zone=$(gcloud compute instances list | tail -n 1 | awk '{print $2}')
   #ipdelete=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}')
 
-tee <<-EOF
+  tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: Destroying Server - Can Take Awhile!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -38,7 +38,7 @@ EOF
 
   gcloud compute instances delete pg-gce --zone $ipzone --quiet
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: Releasing IP Address
@@ -51,7 +51,7 @@ EOF
   gcloud compute addresses delete pg-gce --region $ipregion --quiet
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: Process Complete!
@@ -59,5 +59,5 @@ tee <<-EOF
 
 EOF
 
-  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }

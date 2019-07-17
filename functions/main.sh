@@ -7,13 +7,13 @@
 ################################################################################
 
 ### assists in creating default variables if they do not exist
-variable () {
+variable() {
   file="$1"
-  if [ ! -e "$file" ]; then echo "$2" > $1; fi
+  if [ ! -e "$file" ]; then echo "$2" >$1; fi
 }
 
 ### key variable pull
-variablepull () {
+variablepull() {
 
   ### sets variables if they do not exist
   variable /var/plexguide/project.account NOT-SET
@@ -30,7 +30,7 @@ variablepull () {
 
   #account=$(cat /var/plexguide/project.account)
   account=$(gcloud config configurations list | tail -n 1 | awk '{print $3}')
-  if [[ "$account" != "" ]]; then echo $account > /var/plexguide/project.account; fi
+  if [[ "$account" != "" ]]; then echo $account >/var/plexguide/project.account; fi
 
   ipaddress=$(cat /var/plexguide/project.ipaddress)
   ipregion=$(cat /var/plexguide/project.ipregion)
@@ -43,14 +43,14 @@ variablepull () {
   switchcheck=$(cat /var/plexguide/project.switch)
   if [[ "$switchcheck" != "on" ]]; then
     projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
-    if [[ "$projectid" != "" ]]; then echo $projectid > /var/plexguide/project.id; fi
+    if [[ "$projectid" != "" ]]; then echo $projectid >/var/plexguide/project.id; fi
   fi
 
   serverstatus=serverstatus
   sshstatus=notready
 }
 
-servercheck () {
+servercheck() {
 
   gcedeployedcheck="NOT DEPLOYED"
   minicheck=$(cat /var/plexguide/project.id)
