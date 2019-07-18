@@ -172,7 +172,7 @@ EOF
 QUESTION: Which existing project will be utilized for the PG-GCE?
 $prolist
 
-Quitting? Type >>> q or exit (all lowercase)
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
     }
@@ -199,7 +199,7 @@ EOF
     while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
       infolist
       read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty
-      if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then projectinterface; fi
+      if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then projectinterface; fi
     done
 
     typed=$(cat /var/plexguide/prolist/$typed2)
@@ -261,14 +261,14 @@ INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
 and keep it all lower case! Failing to do so will result in naming
 issues.
 
-Quitting? Type >>> q or exit (all lowercase)
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
     read -p 'Type Project Name | Press [ENTER]: ' projectname </dev/tty
     echo ""
 
     # loops user back to exit if typed
-    if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" ]]; then
+    if [[ "$projectname" == "exit" || "$projectname" == "Exit" || "$projectname" == "EXIT" || "$projectname" == "z" || "$projectname" == "Z" ]]; then
       projectinterface
     fi
 
@@ -308,7 +308,7 @@ associated with it! Be careful in what your doing!
 QUESTION: Which existing project will be deleted?
 $prolist
 
-Quitting? Type >>> q or exit (all lowercase)
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
     }
@@ -339,7 +339,7 @@ EOF
     while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
       existlist
       read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty
-      if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then projectinterface; fi
+      if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then projectinterface; fi
     done
 
     typed=$(cat /var/plexguide/prolist/$typed2)

@@ -39,7 +39,7 @@ $profinal
 EOF
 
     read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty
-    if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then projectinterface; fi
+    if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then projectinterface; fi
   done
 
   typed=$(cat /var/plexguide/prolist/$typed2)
