@@ -153,9 +153,11 @@ Project ID: $projectid
 [1] Utilize/Change Existing Project
 [2] Build a New Project
 [3] Destroy Existing Project
+
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
@@ -172,8 +174,10 @@ EOF
 QUESTION: Which existing project will be utilized for the PG-GCE?
 $prolist
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     }
 
@@ -261,8 +265,10 @@ INSTRUCTIONS: Set a Project Name and keep it short and simple! No spaces
 and keep it all lower case! Failing to do so will result in naming
 issues.
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p 'Type Project Name | Press [ENTER]: ' projectname </dev/tty
     echo ""
@@ -308,8 +314,10 @@ associated with it! Be careful in what your doing!
 QUESTION: Which existing project will be deleted?
 $prolist
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     }
 
