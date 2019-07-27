@@ -24,6 +24,7 @@ if [ -e "$file1" ] && [ ! -e "$file2" ] && [ "$gcheck" == ".internal" ]; then
 ⚠️  NOTE: Please don't close it !
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
       apt-get install mdadm --no-install-recommends -yqq 2>&1 >>/dev/null
@@ -110,6 +111,7 @@ EOF
 ⚠️  Please Wait!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
       sleep 6

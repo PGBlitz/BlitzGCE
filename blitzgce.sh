@@ -53,6 +53,7 @@ a. Destroy Server
 z. Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p 'Type Number | Press [ENTER]: ' typed </dev/tty

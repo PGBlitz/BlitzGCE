@@ -31,9 +31,11 @@ EOF
   #ipdelete=$(gcloud compute addresses list | grep pg-gce | head -n +1 | awk '{print $2}')
 
   tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SYSTEM MESSAGE: Destroying Server - Can Take Awhile!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   gcloud compute instances delete pg-gce --zone $ipzone --quiet

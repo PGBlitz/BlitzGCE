@@ -36,6 +36,7 @@ regioncenter() {
 $profinal
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty

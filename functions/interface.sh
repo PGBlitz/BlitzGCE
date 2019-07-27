@@ -21,6 +21,7 @@ INSTRUCTIONS: Must turn on the billing for first for this project in
 GCE Panel. Exiting!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Acknowledge Error | Press [ENTER] ' typed </dev/tty
 
@@ -54,6 +55,7 @@ location! Ensure that everything is set before deploying the GCE Server!
 
 INSTRUCTIONS: Quit Being a BoneHead and Read!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Acknowledge Being a BoneHead | Press [ENTER] ' typed </dev/tty
 
@@ -74,6 +76,7 @@ be in beast mode during the GCE's duration, 3 - 4 is acceptable.
 
 INSTRUCTIONS: Set the NVME Count ~ 1/2/3/4
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
@@ -112,6 +115,7 @@ be in beast mode during the GCE's duration, 16GB is acceptable.
 
 INSTRUCTIONS: Set the RAM Count ~ 8 / 12 / 16 GB
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
@@ -133,6 +137,7 @@ Only utilize 8 if the GCE will be used heavily!
 
 INSTRUCTIONS: Set the Processor Count ~ 2/4/6/8
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
@@ -236,6 +241,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 PLEASE WAIT! Enabling Drive API ~ Project $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     echo ""
     gcloud services enable drive.googleapis.com --project $typed
@@ -245,6 +251,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 NOTICE: Project Default Set ~ $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     echo $typed >/var/plexguide/pgclone.project
     echo
@@ -293,6 +300,7 @@ INFO: $projectfinal created. Ensure afterwards to ESTABLISH the project
 as your default to utilize!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p 'Acknowledge Info | Press [ENTER]' typed </dev/tty
@@ -358,6 +366,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 System Message: Project Deleted ~ $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     echo $typed >/var/plexguide/pgclone.project
     echo
@@ -391,6 +400,7 @@ WARNING: No projects exists! Cannot delete the default active project if
 that exists!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 
@@ -412,6 +422,7 @@ INSTRUCTIONS: Project ID from the Project Interface must be set first.
 Exiting!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Acknowledge Error | Press [ENTER] ' typed </dev/tty
     gcestart
