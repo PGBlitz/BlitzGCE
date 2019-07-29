@@ -79,13 +79,13 @@ INSTRUCTIONS: Set the NVME Count ~ 1/2/3/4
 
 EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
-
+  ## old code can be deleted MrDoob
   ##if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]]
-
   ##; then
   ## echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
-
+  ## old code can be deleted MrDoob
   ## NVME counter to add dont edit this lines below
+
   nvmedeploy="$(echo /var/plexguide/deploy.nvme)"
 
   if [[ "$typed" == "1" ]]; then
@@ -101,7 +101,9 @@ EOF
     echo "$typed" >/var/plexguide/project.nvme
     echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >$nvmedeploy
   elif [[ "$typed" -gt "4" ]]; then
-     echo "more then 4 is not possible" && sleep 5 && nvmecount
+    echo "more then 4 NVME's is not possible" && sleep 5 && nvmecount
+  elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
+    echo "no changes" fi
   else nvmecount; fi
 }
 ramcount() {
@@ -123,6 +125,10 @@ EOF
 
   if [[ "$typed" == "8" || "$typed" == "12" || "$typed" == "16" ]]; then
     echo "$typed""$suffix" >/var/plexguide/project.ram
+  elif [[ "$typed" -gt "16" ]]; then
+    echo "more then 16 Gb Ram is not possible" && sleep 5 && ramcount
+  elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
+    echo "no changes" fi
   else ramcount; fi
 }
 
@@ -145,6 +151,10 @@ EOF
 
   if [[ "$typed" == "2" || "$typed" == "4" || "$typed" == "6" || "$typed" == "8" ]]; then
     echo "$typed" >/var/plexguide/project.processor
+  elif [[ "$typed" -gt "8" ]]; then
+    echo "more then 8 CPU's is not possible" && sleep 5 && processorcount
+  elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
+    echo "no changes" fi
   else processorcount; fi
 }
 
