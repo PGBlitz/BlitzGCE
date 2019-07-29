@@ -72,7 +72,7 @@ nvmecount() {
 
 Most users will only need to utilize 1 -2 NVME Drives. The more, the
 faster the processing, but the faster your credits drain. If intent is to
-be in beast mode during the GCE's duration, 3 - 4 is acceptable.
+be in beast mode during the GCEs duration, 3 - 4 is acceptable.
 
 INSTRUCTIONS: Set the NVME Count ~ 1/2/3/4
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -86,20 +86,22 @@ EOF
   ## echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
 
   ## NVME counter to add dont edit this lines below
-  nvmedeploy="$(cat /var/plexguide/deploy.nvme)"
+  nvmedeploy="$(echo /var/plexguide/deploy.nvme))"
 
   if [[ "$typed" == "1" ]]; then
     echo "$typed" >/var/plexguide/project.nvme
-    echo -e "--local-ssd interface=nvme" >/var/plexguide/deploy.nvme
+    echo -e "--local-ssd interface=nvme" >$nvmedeploy
   elif [[ "$typed" == "2" ]]; then
     echo "$typed" >/var/plexguide/project.nvme
-    echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme " >/var/plexguide/deploy.nvme
+    echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme " >$nvmedeploy
   elif [[ "$typed" == "3" ]]; then
     echo "$typed" >/var/plexguide/project.nvme
-    echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >/var/plexguide/deploy.nvme
+    echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >$nvmedeploy
   elif [[ "$typed" == "4" ]]; then
     echo "$typed" >/var/plexguide/project.nvme
-    echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >/var/plexguide/deploy.nvme
+    echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >$nvmedeploy
+  elif [[ "$typed" -gt "4" ]]; then
+     echo "more then 4 is not possible" && sleep 5 && nvmecount
   else nvmecount; fi
 }
 ramcount() {
@@ -111,7 +113,7 @@ ramcount() {
 
 Most users will only need to utilize 8 Gb Ram . The more, the
 faster the processing, but the faster your credits drain. If intent is to
-be in beast mode during the GCE's duration, 16GB is acceptable.
+be in beast mode during the GCEs duration, 16GB is acceptable.
 
 INSTRUCTIONS: Set the RAM Count ~ 8 / 12 / 16 GB
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
