@@ -103,7 +103,7 @@ EOF
   elif [[ "$typed" -gt "4" ]]; then
     echo "more then 4 NVME's is not possible" && sleep 5 && nvmecount
   elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
-    echo "no changes" fi
+    echo "no changes" #fi
   else nvmecount; fi
 }
 ramcount() {
@@ -128,7 +128,7 @@ EOF
   elif [[ "$typed" -gt "16" ]]; then
     echo "more then 16 Gb Ram is not possible" && sleep 5 && ramcount
   elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
-    echo "no changes" fi
+    echo "no changes" #fi
   else ramcount; fi
 }
 
@@ -154,7 +154,7 @@ EOF
   elif [[ "$typed" -gt "8" ]]; then
     echo "more then 8 CPU's is not possible" && sleep 5 && processorcount
   elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
-    echo "no changes" fi
+    echo "no changes" #fi
   else processorcount; fi
 }
 
