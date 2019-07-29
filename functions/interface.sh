@@ -86,7 +86,7 @@ EOF
   ## echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
 
   ## NVME counter to add dont edit this lines below
-  nvmedeploy="$(echo /var/plexguide/deploy.nvme))"
+  nvmedeploy="$(echo /var/plexguide/deploy.nvme)"
 
   if [[ "$typed" == "1" ]]; then
     echo "$typed" >/var/plexguide/project.nvme
