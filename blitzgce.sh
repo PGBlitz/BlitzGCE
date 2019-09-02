@@ -5,11 +5,11 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/blitzgce/functions/main.sh
-source /opt/blitzgce/functions/interface.sh
-source /opt/blitzgce/functions/ip.sh
-source /opt/blitzgce/functions/deploy.sh
-source /opt/blitzgce/functions/destroy.sh
+source /pg/blitzgce/functions/main.sh
+source /pg/blitzgce/functions/interface.sh
+source /pg/blitzgce/functions/ip.sh
+source /pg/blitzgce/functions/deploy.sh
+source /pg/blitzgce/functions/destroy.sh
 
 ### the primary interface for GCE
 gcestart() {
