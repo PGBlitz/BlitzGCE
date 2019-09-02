@@ -16,34 +16,34 @@ variable() {
 variablepull() {
 
   ### sets variables if they do not exist
-  variable /var/plexguide/project.account NOT-SET
-  variable /var/plexguide/project.ipaddress NOT-SET
-  variable /var/plexguide/project.ipregion NOT-SET
-  variable /var/plexguide/project.ipzone NOT-SET
-  variable /var/plexguide/project.processor 2
-  variable /var/plexguide/project.ram 8
-  variable /var/plexguide/project.nvme 1
-  variable /var/plexguide/project.id NOT-SET
-  variable /var/plexguide/project.switch off
+  variable /pg/var/project.account NOT-SET
+  variable /pg/var/project.ipaddress NOT-SET
+  variable /pg/var/project.ipregion NOT-SET
+  variable /pg/var/project.ipzone NOT-SET
+  variable /pg/var/project.processor 2
+  variable /pg/var/project.ram 8
+  variable /pg/var/project.nvme 1
+  variable /pg/var/project.id NOT-SET
+  variable /pg/var/project.switch off
 
   ### variables being called
 
-  #account=$(cat /var/plexguide/project.account)
+  #account=$(cat /pg/var/project.account)
   account=$(gcloud config configurations list | tail -n 1 | awk '{print $3}')
-  if [[ "$account" != "" ]]; then echo $account >/var/plexguide/project.account; fi
+  if [[ "$account" != "" ]]; then echo $account >/pg/var/project.account; fi
 
-  ipaddress=$(cat /var/plexguide/project.ipaddress)
-  ipregion=$(cat /var/plexguide/project.ipregion)
-  ipzone=$(cat /var/plexguide/project.ipzone)
-  nvmecount=$(cat /var/plexguide/project.nvme)
-  ramcount=$(cat /var/plexguide/project.ram)
-  processor=$(cat /var/plexguide/project.processor)
+  ipaddress=$(cat /pg/var/project.ipaddress)
+  ipregion=$(cat /pg/var/project.ipregion)
+  ipzone=$(cat /pg/var/project.ipzone)
+  nvmecount=$(cat /pg/var/project.nvme)
+  ramcount=$(cat /pg/var/project.ram)
+  processor=$(cat /pg/var/project.processor)
 
   # if user switches usernames, this turns on. turns of when user sets project again
-  switchcheck=$(cat /var/plexguide/project.switch)
+  switchcheck=$(cat /pg/var/project.switch)
   if [[ "$switchcheck" != "on" ]]; then
     projectid=$(gcloud config configurations list | tail -n 1 | awk '{print $4}')
-    if [[ "$projectid" != "" ]]; then echo $projectid >/var/plexguide/project.id; fi
+    if [[ "$projectid" != "" ]]; then echo $projectid >/pg/var/project.id; fi
   fi
 
   serverstatus=serverstatus
@@ -53,7 +53,7 @@ variablepull() {
 servercheck() {
 
   gcedeployedcheck="NOT DEPLOYED"
-  minicheck=$(cat /var/plexguide/project.id)
+  minicheck=$(cat /pg/var/project.id)
   if [[ "$minicheck" != "NOT-SET" ]]; then
 
     temp55=$(gcloud compute instances list | grep pg-gce)
