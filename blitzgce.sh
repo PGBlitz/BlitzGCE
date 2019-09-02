@@ -18,8 +18,8 @@ gcestart() {
     variablepull
 
     ### For New Installs; hangs because of no account logged in yet; this prevents
-    othercheck=$(cat /var/plexguide/project.account)
-    secondcheck=$(cat /var/plexguide/project.id)
+    othercheck=$(cat /pg/var/project.account)
+    secondcheck=$(cat /pg/var/project.id)
     if [[ "$othercheck" != "NOT-SET" ]]; then
 
         if [[ "$secondcheck" != "NOT-SET" ]]; then
@@ -62,8 +62,8 @@ EOF
     1)
         echo ""
         gcloud auth login --no-launch-browser --verbosity error --quiet
-        echo "NOT-SET" >/var/plexguide/project.id
-        echo "on" >/var/plexguide/project.switch
+        echo "NOT-SET" >/pg/var/project.id
+        echo "on" >/pg/var/project.switch
         ### note --no-user-output-enabled | gcloud auth login --enable-gdrive-access --brief
         # gcloud config configurations list
         gcestart

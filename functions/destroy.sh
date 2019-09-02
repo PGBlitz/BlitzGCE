@@ -47,9 +47,9 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rm -rf /var/plexguide/project.zone
-  rm -rf /var/plexguide/project.ipregion
-  rm -rf /var/plexguide/project.ipaddress
+  rm -rf /pg/var/project.zone
+  rm -rf /pg/var/project.ipregion
+  rm -rf /pg/var/project.ipaddress
   gcloud compute addresses delete pg-gce --region $ipregion --quiet
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 
