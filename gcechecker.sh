@@ -8,7 +8,7 @@
 
 ### NOTE THIS IS JUST A COPY - MAIN ONE SITE IN MAIN REPO - THIS IS JUST FOR INFO
 file1="/dev/nvme0n1"
-file2="/var/plexguide/gce.check"
+file2="/pg/var/gce.check"
 gcheck=$(dnsdomainname | tail -c 10)
 if [ -e "$file1" ] && [ ! -e "$file2" ] && [ "$gcheck" == ".internal" ]; then
 
@@ -30,11 +30,11 @@ EOF
       apt-get install mdadm --no-install-recommends -yqq 2>&1 >>/dev/null
       export DEBIAN_FRONTEND=noninteractive
       #Check for NVME
-      lsblk | grep nvme | awk '{print $1}' >/var/plexguide/nvme.log
-      lsblk | grep nvme | awk '{print $1}' >/var/plexguide/nvmeraid.log
-      sed -i 's/nvme0n//g' /var/plexguide/nvmeraid.log
+      lsblk | grep nvme | awk '{print $1}' >/pg/var/nvme.log
+      lsblk | grep nvme | awk '{print $1}' >/pg/var/nvmeraid.log
+      sed -i 's/nvme0n//g' /pg/var/nvmeraid.log
       #Check for NVME
-      nvme="$(tail -n1 /var/plexguide/nvmeraid.log)"
+      nvme="$(tail -n1 /pg/var/nvmeraid.log)"
 
       if [[ "$nvme" == "2" ]]; then
             mdadm --create /dev/md0 --level=0 --raid-devices=2 /dev/nvme0n1 /dev/nvme0n2
@@ -91,14 +91,14 @@ EOF
             echo "nothing to do"
       fi
 
-      touch /var/plexguide/gce.check
-      rm -rf /var/plexguide/gce.failed 1>/dev/null 2>&1
-      rm -rf /var/plexguide/gce.false 1>/dev/null 2>&1
-      rm -rf /var/plexguide/nvme.log 1>/dev/null 2>&1
-      rm -rf /var/plexguide/nvmeraid.log 1>/dev/null 2>&1
+      touch /pg/var/gce.check
+      rm -rf /pg/var/gce.failed 1>/dev/null 2>&1
+      rm -rf /pg/var/gce.false 1>/dev/null 2>&1
+      rm -rf /pg/var/nvme.log 1>/dev/null 2>&1
+      rm -rf /pg/var/nvmeraid.log 1>/dev/null 2>&1
 
-      echo "feeder" >/var/plexguide/pg.server.deploy
-      cat /var/plexguide/pg.edition >/var/plexguide/pg.edition.stored
+      echo "feeder" >/pg/var/pg.server.deploy
+      cat /pg/var/pg.edition >/pg/var/pg.edition.stored
 
       tee <<-EOF
 
@@ -132,10 +132,10 @@ elif [ ! -e "$file1" ] && [ ! -e "$file2" ] && [ "$gcheck" == ".internal" ]; the
 
 EOF
       read -p 'Press [ENTER] to Continue! ' typed </dev/tty
-      rm -rf /var/plexguide/gce.failed 1>/dev/null 2>&1
-      rm -rf /var/plexguide/gce.false 1>/dev/null 2>&1
-      rm -rf /var/plexguide/nvme.log 1>/dev/null 2>&1
-      rm -rf /var/plexguide/nvmeraid.log1 >/dev/null 2>&1
+      rm -rf /pg/var/gce.failed 1>/dev/null 2>&1
+      rm -rf /pg/var/gce.false 1>/dev/null 2>&1
+      rm -rf /pg/var/nvme.log 1>/dev/null 2>&1
+      rm -rf /pg/var/nvmeraid.log1 >/dev/null 2>&1
 else
-      touch /var/plexguide/gce.false
+      touch /pg/var/gce.false
 fi
