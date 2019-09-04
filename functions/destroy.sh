@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /pg/blitzgce/functions/main.sh
+source /opt/blitzgce/functions/main.sh
 
 destroyserver() {
 
@@ -47,9 +47,9 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rm -rf /pg/var/project.zone
-  rm -rf /pg/var/project.ipregion
-  rm -rf /pg/var/project.ipaddress
+  rm -rf /var/plexguide/project.zone
+  rm -rf /var/plexguide/project.ipregion
+  rm -rf /var/plexguide/project.ipaddress
   gcloud compute addresses delete pg-gce --region $ipregion --quiet
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
 

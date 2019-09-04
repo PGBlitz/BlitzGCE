@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /pg/blitzgce/functions/main.sh
+source /opt/blitzgce/functions/main.sh
 
 deployserver() {
   variablepull
@@ -80,7 +80,7 @@ EOF
     --custom-cpu $processor --custom-memory $ramcount \
     --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud \
     --boot-disk-auto-delete --boot-disk-size 200GB \
-    $(tail /pg/var/deploy.nvme)
+    $(tail /var/plexguide/deploy.nvme)
 
   # ### Deploys the PG Template
   #gcloud compute instance-templates create pg-gce-blueprint \

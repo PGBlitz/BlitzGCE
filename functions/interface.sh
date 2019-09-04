@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /pg/blitzgce/functions/main.sh
+source /opt/blitzgce/functions/main.sh
 suffix=GB
 billingdeny() {
   if [[ $(gcloud beta billing accounts list | grep "\<True\>") == "" ]]; then
@@ -34,10 +34,10 @@ deployfail() {
 
   gcefail="off"
 
-  fail1=$(cat /pg/var/project.ipregion)
-  fail2=$(cat /pg/var/project.processor)
-  fail3=$(cat /pg/var/project.account)
-  fail4=$(cat /pg/var/project.nvme)
+  fail1=$(cat /var/plexguide/project.ipregion)
+  fail2=$(cat /var/plexguide/project.processor)
+  fail3=$(cat /var/plexguide/project.account)
+  fail4=$(cat /var/plexguide/project.nvme)
 
   if [[ "$fail1" == "NOT-SET" || "$fail2" == "NOT-SET" || "$fail3" == "NOT-SET" || "$fail4" == "NOT-SET" ]]; then
     gcefail="on"
@@ -82,23 +82,23 @@ EOF
   ## old code can be deleted MrDoob
   ##if [[ "$typed" == "1" || "$typed" == "2" || "$typed" == "3" || "$typed" == "4" ]]
   ##; then
-  ## echo "$typed" > /pg/var/project.nvme; else nvmecount; fi
+  ## echo "$typed" > /var/plexguide/project.nvme; else nvmecount; fi
   ## old code can be deleted MrDoob
   ## NVME counter to add dont edit this lines below
 
-  nvmedeploy="$(echo /pg/var/deploy.nvme)"
+  nvmedeploy="$(echo /var/plexguide/deploy.nvme)"
 
   if [[ "$typed" == "1" ]]; then
-    echo "$typed" >/pg/var/project.nvme
+    echo "$typed" >/var/plexguide/project.nvme
     echo -e "--local-ssd interface=nvme" >$nvmedeploy
   elif [[ "$typed" == "2" ]]; then
-    echo "$typed" >/pg/var/project.nvme
+    echo "$typed" >/var/plexguide/project.nvme
     echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme " >$nvmedeploy
   elif [[ "$typed" == "3" ]]; then
-    echo "$typed" >/pg/var/project.nvme
+    echo "$typed" >/var/plexguide/project.nvme
     echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >$nvmedeploy
   elif [[ "$typed" == "4" ]]; then
-    echo "$typed" >/pg/var/project.nvme
+    echo "$typed" >/var/plexguide/project.nvme
     echo -e "--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme \\n--local-ssd interface=nvme" >$nvmedeploy
   elif [[ "$typed" -gt "4" ]]; then
     echo "more then 4 NVME's is not possible" && sleep 5 && nvmecount
@@ -124,7 +124,7 @@ EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
   if [[ "$typed" == "8" || "$typed" == "12" || "$typed" == "16" ]]; then
-    echo "$typed""$suffix" >/pg/var/project.ram
+    echo "$typed""$suffix" >/var/plexguide/project.ram
   elif [[ "$typed" -gt "16" ]]; then
     echo "more then 16 Gb Ram is not possible" && sleep 5 && ramcount
   elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
@@ -150,7 +150,7 @@ EOF
   read -p 'Type Number | Press [ENTER]: ' typed </dev/tty
 
   if [[ "$typed" == "2" || "$typed" == "4" || "$typed" == "6" || "$typed" == "8" ]]; then
-    echo "$typed" >/pg/var/project.processor
+    echo "$typed" >/var/plexguide/project.processor
   elif [[ "$typed" -gt "8" ]]; then
     echo "more then 8 CPU's is not possible" && sleep 5 && processorcount
   elif [[ "$typed" == "Z" || "z" || "q" || "Q" || "c" || "C" ]]; then
@@ -199,22 +199,22 @@ EOF
     }
 
     pnum=0
-    mkdir -p /pg/var/prolist
-    rm -rf /pg/var/prolist/* 1>/dev/null 2>&1
+    mkdir -p /var/plexguide/prolist
+    rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
-    echo "" >/pg/var/prolist/final.sh
-    gcloud projects list | cut -d' ' -f1 | tail -n +2 >/pg/var/prolist/prolist.sh
+    echo "" >/var/plexguide/prolist/final.sh
+    gcloud projects list | cut -d' ' -f1 | tail -n +2 >/var/plexguide/prolist/prolist.sh
 
     ### project no exist check
-    pcheck=$(cat /pg/var/prolist/prolist.sh)
+    pcheck=$(cat /var/plexguide/prolist/prolist.sh)
     if [[ "$pcheck" == "" ]]; then noprojects; fi
 
     while read p; do
       let "pnum++"
-      echo "$p" >"/pg/var/prolist/$pnum"
-      echo "[$pnum] $p" >>/pg/var/prolist/final.sh
-    done </pg/var/prolist/prolist.sh
-    prolist=$(cat /pg/var/prolist/final.sh)
+      echo "$p" >"/var/plexguide/prolist/$pnum"
+      echo "[$pnum] $p" >>/var/plexguide/prolist/final.sh
+    done </var/plexguide/prolist/prolist.sh
+    prolist=$(cat /var/plexguide/prolist/final.sh)
 
     typed2=999999999
     while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
@@ -223,11 +223,11 @@ EOF
       if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then projectinterface; fi
     done
 
-    typed=$(cat /pg/var/prolist/$typed2)
+    typed=$(cat /var/plexguide/prolist/$typed2)
     gcloud config set project $typed
     billingdeny
 
-    echo "off" >/pg/var/project.switch
+    echo "off" >/var/plexguide/project.switch
 
     tee <<-EOF
 
@@ -265,7 +265,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-    echo $typed >/pg/var/pgclone.project
+    echo $typed >/var/plexguide/pgclone.project
     echo
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
     variablepull
@@ -342,26 +342,26 @@ EOF
     }
 
     pnum=0
-    mkdir -p /pg/var/prolist
-    rm -rf /pg/var/prolist/* 1>/dev/null 2>&1
+    mkdir -p /var/plexguide/prolist
+    rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
-    echo "" >/pg/var/prolist/final.sh
-    gcloud projects list | cut -d' ' -f1 | tail -n +2 >/pg/var/prolist/prolist.sh
+    echo "" >/var/plexguide/prolist/final.sh
+    gcloud projects list | cut -d' ' -f1 | tail -n +2 >/var/plexguide/prolist/prolist.sh
 
     ### prevent bonehead from deleting the project that is active!
     variablepull
-    sed -i -e "/${projectid}/d" /pg/var/prolist/prolist.sh
+    sed -i -e "/${projectid}/d" /var/plexguide/prolist/prolist.sh
 
     ### project no exist check
-    pcheck=$(cat /pg/var/prolist/prolist.sh)
+    pcheck=$(cat /var/plexguide/prolist/prolist.sh)
     if [[ "$pcheck" == "" ]]; then noprojects; fi
 
     while read p; do
       let "pnum++"
-      echo "$p" >"/pg/var/prolist/$pnum"
-      echo "[$pnum] $p" >>/pg/var/prolist/final.sh
-    done </pg/var/prolist/prolist.sh
-    prolist=$(cat /pg/var/prolist/final.sh)
+      echo "$p" >"/var/plexguide/prolist/$pnum"
+      echo "[$pnum] $p" >>/var/plexguide/prolist/final.sh
+    done </var/plexguide/prolist/prolist.sh
+    prolist=$(cat /var/plexguide/prolist/final.sh)
 
     typed2=999999999
     while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
@@ -370,7 +370,7 @@ EOF
       if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then projectinterface; fi
     done
 
-    typed=$(cat /pg/var/prolist/$typed2)
+    typed=$(cat /var/plexguide/prolist/$typed2)
     gcloud projects delete "$typed"
 
     tee <<-EOF
@@ -380,7 +380,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-    echo $typed >/pg/var/pgclone.project
+    echo $typed >/var/plexguide/pgclone.project
     echo
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
     variablepull
@@ -421,7 +421,7 @@ EOF
 }
 
 projectdeny() {
-  if [[ $(cat /pg/var/project.id) == "NOT-SET" ]]; then
+  if [[ $(cat /var/plexguide/project.id) == "NOT-SET" ]]; then
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
