@@ -185,7 +185,11 @@ if [ "$menu" == "4" ]; then
   done
 
   echo $typed >/var/plexguide/project.final
+<<<<<<< HEAD
   echo 'INFO - Selected: Exiting Application Suite Interface' >/var/plexguide/logs/pg.log && bash /opt/plexguide/menu/log/log.sh
+=======
+  echo 'INFO - Selected: Exiting Application Suite Interface' >/var/plexguide/logs/pg.log && bash /pg/plexguide/menu/log/log.sh
+>>>>>>> parent of 42686d0... Third iteration. Ran a full find and replace for /var/plexguide
   exit
 fi
 
